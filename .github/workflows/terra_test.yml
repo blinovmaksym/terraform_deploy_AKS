@@ -19,8 +19,8 @@ jobs:
     - name: Clon Rep
       uses: actions/checkout@v1
 
-    - name: echo
-      run: cat var.AZURE_CLIENT_SECRET
+    # - name: echo
+    #   run: cat var.AZURE_CLIENT_SECRET
 
     - uses: Azure/login@v1
       with:
