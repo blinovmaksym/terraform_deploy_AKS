@@ -3,6 +3,7 @@ env:
     client-id: ${{ secrets.AZURE_CLIENT_ID }}
     tenant-id: ${{ secrets.AZURE_TENANT_ID }}
     subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    clientSecret: ${{ secrets.AZURE_CLIENT_SECRET }}
     
 on:
   push:
@@ -18,8 +19,11 @@ jobs:
     - name: Clon Rep
       uses: actions/checkout@v1
 
-    - name: az
-      run: az login
+    - uses: Azure/login@v1
+      with:
+        creds: '{"client-id","clientSecret","subscription-id","tenant-id"}'
+
+
     - name: terraform init
       run: terraform init
 
