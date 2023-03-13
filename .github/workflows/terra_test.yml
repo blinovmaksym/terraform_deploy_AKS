@@ -17,6 +17,7 @@ jobs:
     steps:
     - name: Clon Rep
       uses: actions/checkout@v1
+      
     
     # - name: 'Az CLI login'
     #   uses: Azure/login@v1
