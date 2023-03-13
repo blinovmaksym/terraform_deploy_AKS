@@ -1,15 +1,15 @@
 name: test
 
 on:
-  # push:
-  #   branches:
-  #     - main
-  workflow_dispatch:
-    inputs:
-      TFAction:
-        description: "Terraform Action- Apply or Destroy"     
-        required: true
-        default: "apply"    
+  push:
+    branches:
+      - main
+  # workflow_dispatch:
+  #   inputs:
+  #     TFAction:
+  #       description: "Terraform Action- Apply or Destroy"     
+  #       required: true
+  #       default: "apply"    
 
 permissions:
   id-token: write
@@ -45,12 +45,12 @@ jobs:
       run: terraform plan
 
     - name: terraform apply
-      if: ${{ inputs.TFAction == 'apply'}}
+      # if: ${{ inputs.TFAction == 'apply'}}
       run: terraform apply -auto-approve
 
-    - name: Terraform Destroy
-      if: ${{ inputs.TFAction == 'destroy' }}
-      run: terraform destroy -input=false -auto-approve
+    # - name: Terraform Destroy
+    #   # if: ${{ inputs.TFAction == 'destroy' }}
+    #   run: terraform destroy -auto-approve
 
 
 
