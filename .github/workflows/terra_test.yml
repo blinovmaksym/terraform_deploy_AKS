@@ -28,7 +28,7 @@ jobs:
       run: terraform init
 
     - name: az login
-      run: az login --tenant [tenant-id]
+      run: az login --tenant [AZURE_TENANT_ID]
 
     - name: terraform plan
       id: plan
