@@ -1,6 +1,6 @@
 provider "azurerm" {
   features {}
-  
+ 
 }
 
 terraform {
@@ -37,16 +37,4 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   
-}
-
-resource "kubernetes_pod" "my-pod" {
-  metadata {
-    name = "my-pod"
-  }
-  spec {
-    container {
-      name  = "nginx"
-      image = "nginx"
-    }
-  }
 }
