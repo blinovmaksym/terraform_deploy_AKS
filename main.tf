@@ -12,6 +12,7 @@ terraform {
   }
 }
 
+
 resource "azurerm_resource_group" "aks-rg" {
   name     = "aks_tf_test"
   location = "EastUS2"
