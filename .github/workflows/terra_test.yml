@@ -5,14 +5,13 @@ on:
     branches:
       - main
       
-permissions:
-  contents: read
-  pages: write
-  id-token: write
 
 jobs:
   terraform:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
     - name: Clon Rep
