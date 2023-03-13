@@ -8,14 +8,14 @@ on:
 
 jobs:
   first_job:
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
 
     steps:
     - name: Print Hello
       run: echo "Hello"
 
     - name: Clon Rep
-      uses: actions/checkout@v1
+      uses: actions/checkout@v
 
     - name: Printing Deployment  package
       run: ls -al
