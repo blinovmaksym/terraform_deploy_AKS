@@ -14,12 +14,11 @@ jobs:
     - name: Print Hello
       run: echo "Hello"
 
-    - name: Print Execute
-      run: |
-        echo "hello3"
-        echo "hello4"
-        echo "hello5"
+    - name: Clon Rep
+      uses: action/checkout@v1
 
+    - name: Printing Deployment  package
+      run: ls -al
 
 
 
