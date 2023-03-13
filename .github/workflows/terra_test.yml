@@ -14,9 +14,7 @@ jobs:
     - name: Print Hello
       run: echo "Hello"
 
-    - name: Clon Rep
-      uses: actions/checkout@v1
-
+    
     - name: Printing Deployment  package
       run: ls -al
 
@@ -27,6 +25,9 @@ jobs:
     needs: [first_job]
 
     steps:
+    - name: Clon Rep
+      uses: actions/checkout@v1
+
     - name: terraform plan
       run: terraform plan
 
