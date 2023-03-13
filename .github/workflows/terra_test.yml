@@ -13,7 +13,16 @@ jobs:
     steps:
     - name: Print Hello
       run: echo "Hello"
-      
+
+    - name: Print Execute
+      run: |
+        echo "hello3"
+        echo "hello4"
+        echo "hello5"
+
+
+
+
   second_job:
     runs-on: ubuntu-latest
 
