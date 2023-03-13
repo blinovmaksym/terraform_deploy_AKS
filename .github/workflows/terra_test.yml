@@ -15,16 +15,19 @@ jobs:
       run: echo "Hello"
 
     - name: Clon Rep
-      uses: actions/checkout@v
+      uses: actions/checkout@v1
 
     - name: Printing Deployment  package
       run: ls -al
 
 
 
-  second_job:
+  terraform:
     runs-on: ubuntu-latest
+    needs: [first_job]
 
     steps:
-    - name: Print Hello2
-      run: echo "Hello2"
+    - name: terraform plan
+      run: terraform plan
+
+
