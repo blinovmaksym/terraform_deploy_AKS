@@ -1,9 +1,9 @@
 name: test
 
 on:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
   workflow_dispatch:
     inputs:
       TFAction:
@@ -45,11 +45,11 @@ jobs:
       run: terraform plan
 
     - name: terraform apply
-      if: $ {{ inputs.TFAction == 'apply'}} 
+      if: ${{ inputs.TFAction == 'apply'}}
       run: terraform apply -auto-approve
 
     - name: Terraform Destroy
-      if: $ {{ inputs.TFAction == 'destroy' }} 
+      if: ${{ inputs.TFAction == 'destroy' }}
       run: terraform destroy -input=false -auto-approve
 
 
