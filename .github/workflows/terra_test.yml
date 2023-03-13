@@ -15,7 +15,7 @@ jobs:
       run: echo "Hello"
 
     - name: Clon Rep
-      uses: action/checkout@v1
+      uses: actions/checkout@v1
 
     - name: Printing Deployment  package
       run: ls -al
