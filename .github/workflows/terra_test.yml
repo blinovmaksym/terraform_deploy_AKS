@@ -39,15 +39,7 @@ jobs:
        
 
     - name: terraform init
-      run: terraform init \
-        -backend-config="storage_account_name=<    storage_account_name = "tfstate12334">" \
-        -backend-config="container_name=<tfstate>" \
-        -backend-config="key=<terraform.tfstate>" \
-        -backend-config="access_key=<xu+ou9EKTUv24/lMVn3Tcq5f98isQScLqDF1/RDYhydFjT//K30NlYyINEp0M1/9OsqpzHyHB5e0+AStKHDxaA==>"
-
-      #  terraform init -backend-config="arm_subscriptions_id=$ {{ secrets.ARM_SUBSCRIPTION_ID }},arm_tenant-id={{ secrets.ARM_TENANT_ID }} "
-
-      
+      run: terraform init -reconfigure
         
      
 
