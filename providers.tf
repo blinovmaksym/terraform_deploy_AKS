@@ -9,6 +9,9 @@ terraform {
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "3.47.0"
+      clienr_id="cfb628af-80db-4f46-adb9-690c7bebf8fb"
+      client_secret="j1Y8Q~Q4EzoMBxA6QORZaLSoSRTceThAUXJlpcFj"
+
     }
     
   }
