@@ -34,7 +34,6 @@ jobs:
 
     - name: terraform init
       run: terraform init    
-      
 
     - name: terraform plan
       id: plan
