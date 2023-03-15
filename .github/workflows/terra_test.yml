@@ -29,15 +29,7 @@ jobs:
     - name: Clon Rep
       uses: actions/checkout@v1
 
-    # - name: Update Terraform variables
-    #   uses: devops-infra/action-terraform-copy-vars@v0.2
-    #   with:
-    #     dirs_with_modules: modules
-    #     files_with_vars: variables.tf
-    #     all_vars_file: all-variables.tf
-
-    - name: terraform init
-      run: terraform init
+    
 
     - name: 'Az CLI login using OIDC'
       uses: azure/login@v1
@@ -45,6 +37,9 @@ jobs:
         client-id: ${{ secrets.AZURE_CLIENT_ID }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    - name: terraform init
+      run: terraform init    
 
     - name: terraform plan
       id: plan
