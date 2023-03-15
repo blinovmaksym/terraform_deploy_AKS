@@ -4,12 +4,6 @@ on:
   push:
     branches:
       - main
-  # workflow_dispatch:
-  #   inputs:
-  #     TFAction:
-  #       description: "Terraform Action- Apply or Destroy"     
-  #       required: true
-  #       default: "apply"    
 
 permissions:
   id-token: write
