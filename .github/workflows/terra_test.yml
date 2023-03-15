@@ -29,10 +29,12 @@ jobs:
     - name: Clon Rep
       uses: actions/checkout@v1
 
-    - name: Fail on different veriables' definitions
+    - name: Update Terraform variables
       uses: devops-infra/action-terraform-copy-vars@v0.2
-      # with:
-      #     fail_on_changes: true
+      with:
+        dirs_with_modules: modules
+        files_with_vars: variables.tf
+        all_vars_file: all-variables.tf
 
     - name: terraform init
       run: terraform init
