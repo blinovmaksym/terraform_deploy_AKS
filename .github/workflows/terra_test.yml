@@ -39,13 +39,9 @@ jobs:
        
 
     - name: terraform init
-      run: terraform init
-      uses: azure/login@v1
-      with:
-        arm_subscription-id: $ {{ secrets.ARM_SUBSCRIPTION_ID }}
-        arm_tenant-id: $ {{ secrets.ARM_TENANT_ID }}
-        arm_client-id: $ {{ secrets.ARM_CLIENT_ID }}
-        arm_client-secret: $ {{ secrets.ARM_CLIENT_SECRET }}
+      run: terraform init -backend-config="arm_subscriptions_id=$ {{ secrets.ARM_SUBSCRIPTION_ID }},arm_tenant-id={{ secrets.ARM_TENANT_ID }} "
+
+      
         
      
 
