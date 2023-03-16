@@ -36,7 +36,8 @@ jobs:
        
 
     - name: terraform init
-      run: terraform init -backend-config="client-id=${secrets.AZURE_CLIENT_ID}" -backend-config="tenant-id=${secrets.AZURE_TENANT_ID}" -backend-config="subscription-id=${secrets.AZURE_SUBSCRIPTION_ID}"
+      run: terraform init -backend-config="client_id=${{ secrets.AZURE_CLIENT_ID }}" -backend-config="tenant_id=${{ secrets.AZURE_TENANT_ID }}" -backend-config="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+
 
      
     - name: terraform plan
