@@ -2,8 +2,8 @@ name: test
 
 on:
   push:
-    paths:
-    - 'terraform-azure/**'
+    # paths:
+    # - 'terraform-azure/**'
     branches:
       - main
 
