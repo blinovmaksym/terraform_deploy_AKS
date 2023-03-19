@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: terraform-azure
+        working-directory: terraform-azure/script
 
     steps:
     - name: Copy script files
