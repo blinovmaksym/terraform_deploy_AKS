@@ -45,7 +45,7 @@ jobs:
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}    
 
-    - name: test script
+    - name: Create Storage
       env:
         SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
       run: bash  $SCRIPT_DIR/create_storage.sh
