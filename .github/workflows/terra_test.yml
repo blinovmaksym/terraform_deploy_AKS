@@ -40,7 +40,10 @@ jobs:
   
 
     - name: terraform init
-      run: terraform init    
+      run: terraform init
+
+
+
       working-directory: terraform-azure
 
 
