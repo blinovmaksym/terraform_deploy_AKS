@@ -35,7 +35,7 @@ jobs:
     
 
     - name: test script
-      run: bash $(Build.ArtifactStagingDirectory)/create_storage.sh
+      run: bash $(Build.ArtifactStagingDirectory)/terraform-azure/scripts/test.sh
 
 
     
