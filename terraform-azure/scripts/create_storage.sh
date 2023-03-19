@@ -5,7 +5,11 @@ STORAGE_ACCOUNT_NAME=tfstateitsprout
 CONTAINER_NAME=tfstate
 
  # Check if storage account exists
-if ! az storage account show --name $STORAGE_ACCOUNT_NAME --query id --output tsv >/dev/null 2>&1; then
+if  az storage account show --name $STORAGE_ACCOUNT_NAME --query id --output tsv >/dev/null 2>&1; then
+echo "Storage already exist"
+sleep 5s;
+
+else
 # Create resource group
 az group create --name $RESOURCE_GROUP_NAME --location eastus2
 # Create storage account
@@ -13,8 +17,6 @@ az storage account create --resource-group $RESOURCE_GROUP_NAME --name $STORAGE_
 # Create blob container
 az storage container create --name $CONTAINER_NAME --account-name $STORAGE_ACCOUNT_NAME
 sleep 30s
-else
-echo "Storage already exist"
-sleep 5s;
+
 
 fi
