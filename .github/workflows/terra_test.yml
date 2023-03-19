@@ -11,7 +11,11 @@ permissions:
   id-token: write
   contents: read
   pull-requests: write
-
+env:
+        ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
     
 
 jobs:
@@ -36,18 +40,14 @@ jobs:
   
 
     - name: terraform init
-      run: terraform init
-      env:
-        ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-        ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      run: terraform init    
       working-directory: terraform-azure
 
 
     - name: terraform plan
       id: plan
       run: terraform plan
+      
       working-directory: terraform-azure
 
     - name: terraform apply
