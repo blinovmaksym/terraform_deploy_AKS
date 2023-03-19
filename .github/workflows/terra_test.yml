@@ -33,7 +33,7 @@ jobs:
     - name: test script
       env:
         SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
-      run: bash -n $SCRIPT_DIR/create_storage.sh
+      run: bash -n $SCRIPT_DIR/test.sh
 
 
     
