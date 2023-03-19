@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 RESOURCE_GROUP_NAME=tfstate
 STORAGE_ACCOUNT_NAME=tfstateitsprout
 CONTAINER_NAME=tfstate
@@ -17,6 +15,6 @@ az storage container create --name $CONTAINER_NAME --account-name $STORAGE_ACCOU
 sleep 30s
 else
 echo "Storage already exist"
-sleep 5s
+sleep 5s;
 
 fi
