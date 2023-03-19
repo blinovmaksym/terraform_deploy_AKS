@@ -1,3 +1,4 @@
 #!/bin/bash
 
-( sleep 100s ; echo "Hello" ) &
+echo "Hello"
+sleep 120s
