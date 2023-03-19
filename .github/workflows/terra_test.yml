@@ -20,7 +20,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: script-files
-        path: terraform-azure/scripts
+        path: ./terraform-azure/scripts/
 
     - name: Download script files
       uses: actions/download-artifact@v2
