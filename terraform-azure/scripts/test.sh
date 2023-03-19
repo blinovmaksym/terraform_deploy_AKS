@@ -1,4 +1,4 @@
 #!/bin/bash
 
 echo "Hello"
-sleep 120s
+sleep 6s
