@@ -29,7 +29,10 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: script-files
-      run: ls -al  
+        
+    - name: Display structure of downloaded files
+      run: ls -R    
+    
 
     - name: test script
       run: bash $(Build.ArtifactStagingDirectory)/terraform-azure/scripts/create_storage.sh
