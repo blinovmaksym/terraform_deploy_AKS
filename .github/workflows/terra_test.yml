@@ -30,10 +30,6 @@ jobs:
       with:
         name: script-files
 
-    - name: Display structure of downloaded files
-      run: ls -R    
-    
-
     - name: test script
       env:
         SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
