@@ -35,7 +35,9 @@ jobs:
     
 
     - name: test script
-      run: bash $(Build.ArtifactStagingDirectory)/terraform-azure/scripts/test.sh
+      env:
+        SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts/
+      run: bash $SCRIPT_DIR/test.sh
 
 
     
