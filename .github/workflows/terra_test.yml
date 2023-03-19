@@ -4,10 +4,10 @@ on:
     branches:
       - main
 env:
-        arm_client-id: ${{ secrets.AZURE_CLIENT_ID }}
-        arm_client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
-        arm_tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-        arm_sub-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 jobs:
   terraform:
     runs-on: ubuntu-latest
@@ -16,25 +16,27 @@ jobs:
         working-directory: terraform-azure
 
     steps:
+    - name: test script
+      run: bash test.sh
+
     - name: Clon Rep
       uses: actions/checkout@v1  
 
 
+    # - name: terraform init
+    #   run: terraform init
 
-    - name: terraform init
-      run: terraform init
-
-    - name: terraform plan
-      id: plan
-      run: terraform plan
+    # - name: terraform plan
+    #   id: plan
+    #   run: terraform plan
       
-    - name: terraform apply
-      if: "!contains(github.event.head_commit.message, 'destroy')"
-      run: terraform apply -auto-approve
+    # - name: terraform apply
+    #   if: "!contains(github.event.head_commit.message, 'destroy')"
+    #   run: terraform apply -auto-approve
 
-    - name: Terraform Destroy
-      if: contains(github.event.head_commit.message, 'destroy')
-      run: terraform destroy -auto-approve
+    # - name: Terraform Destroy
+    #   if: contains(github.event.head_commit.message, 'destroy')
+    #   run: terraform destroy -auto-approve
       
 
 
