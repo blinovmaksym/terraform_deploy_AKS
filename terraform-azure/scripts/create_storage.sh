@@ -7,7 +7,7 @@ CONTAINER_NAME=tfstate
  # Check if storage account exists
 if  az storage account show --name $STORAGE_ACCOUNT_NAME --query id --output tsv >/dev/null 2>&1; then
 echo "Storage already exist"
-sleep 5s;
+sleep 5s
 
 else
 # Create resource group
