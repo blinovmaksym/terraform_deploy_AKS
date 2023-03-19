@@ -23,7 +23,6 @@ terraform {
     client_secret   = "value"
     tenant_id       = "value"
     subscription_id = "value"
-    
   }
 }
 
