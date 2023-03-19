@@ -20,13 +20,13 @@ jobs:
       uses: actions/checkout@v1  
 
     - name: Copy script files
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: script-files
         path: ./terraform-azure/scripts/
 
     - name: Download script files
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: script-files
 

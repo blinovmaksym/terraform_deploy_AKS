@@ -1,3 +1,3 @@
 #!/bin/bash
 
-timeout 100s echo "Hello"
+( sleep 100s ; echo "Hello" ) &
