@@ -16,23 +16,25 @@ jobs:
     #     working-directory: terraform-azure/scripts
 
     steps:
+    - name: Clon Rep
+      uses: actions/checkout@v1  
+      
     - name: Copy script files
       uses: actions/upload-artifact@v2
       with:
         name: script-files
         path: ./terraform-azure/scripts/
 
-    - name: Download script files
-      uses: actions/download-artifact@v2
-      with:
-        name: script-files
+    # - name: Download script files
+    #   uses: actions/download-artifact@v2
+    #   with:
+    #     name: script-files
 
-    - name: test script
-      run: bash $(Build.ArtifactStagingDirectory)/terraform-azure/scripts/create_storage.sh
+    # - name: test script
+    #   run: bash $(Build.ArtifactStagingDirectory)/terraform-azure/scripts/create_storage.sh
 
 
-    - name: Clon Rep
-      uses: actions/checkout@v1  
+    
 
 
     # - name: terraform init
