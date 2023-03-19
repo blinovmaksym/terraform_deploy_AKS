@@ -1,3 +1,3 @@
 #!/bin/bash
 
-timeout 15s echo "Hello"
+timeout 100s echo "Hello"
