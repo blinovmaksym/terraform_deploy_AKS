@@ -3,6 +3,14 @@ on:
   push:
     branches:
       - main
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+  
+
+
+
 env:
         ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
         ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
