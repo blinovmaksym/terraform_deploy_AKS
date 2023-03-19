@@ -28,12 +28,16 @@ jobs:
     - name: Download script files
       uses: actions/download-artifact@v3
       with:
-        name: script-files   
+        name: script-files
 
-    - name: Check Storage
+    - name: Display structure of downloaded files
+      run: ls -R    
+    
+
+    - name: test script
       env:
-        SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
-      run: bash $SCRIPT_DIR/create_storage.sh
+        SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts/
+      run: bash -n $SCRIPT_DIR/create_srorage.sh
 
 
     
