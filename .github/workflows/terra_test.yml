@@ -18,6 +18,7 @@ jobs:
     steps:
     - name: test script
       run: bash test.sh
+      working-directory: terraform-azure/scripts
 
     - name: Clon Rep
       uses: actions/checkout@v1  
