@@ -57,6 +57,13 @@ jobs:
     - name: Setup kubectl
       uses: azure/setup-kubectl@v1
 
+    - name: Check kubeconfig file
+      run: cat ${{ env.KUBECONFIG }}
+    
+    - name: Check kubeconfig file_!
+      run: kubectl config view 
+  
+
     - name: Apply Kubernetes manifest
       env:
         KUBECONFIG: ${{ github.workspace }}/kubeconfig
