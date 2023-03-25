@@ -39,6 +39,12 @@ jobs:
       if: "!contains(github.event.head_commit.message, 'destroy')"
       run: terraform apply -auto-approve
 
+    - name: ttest
+      id: plan
+      run: ls -l
+      
+
+
     - name: Terraform Destroy
       if: contains(github.event.head_commit.message, 'destroy')
       run: terraform destroy -auto-approv
