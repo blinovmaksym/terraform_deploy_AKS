@@ -50,6 +50,10 @@ jobs:
           pwd
           ls kubeconfig
 
+    - name: Verify kubeconfig file exists
+      run: ls -la ${{ env.KUBECONFIG }}
+    
+
     - name: Check kubeconfig file_!
       run: cat ${{ env.KUBECONFIG }}
      
