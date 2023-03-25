@@ -82,19 +82,15 @@ jobs:
         ls
         cat ${{ env.KUBECONFIG }}
     
-    - name: Check kubeconfig file_!
-      run: kubectl config view 
+    - name: Apply Kubernetes manifest
+      run: kubectl apply -f hello-world.yml
   
 
     - name: Check kubeconfig file_!
       run: kubectl get nodes
 
-    # - name: Apply Kubernetes manifest
-    #   env:
-    #     KUBECONFIG: ${{ github.workspace }}/kubeconfig
-    #   run: |
-    #     kubectl apply -f hello-world.yml
-
+    - name: Apply Kubernetes manifest
+      run: kubectl get service
 
 
 
