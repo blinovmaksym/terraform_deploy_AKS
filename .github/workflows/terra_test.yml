@@ -47,7 +47,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: kubeconfig
-        path: ~/.kube/config  
+        path: terraform-azure/kubeconfig 
      
  
     - name: Terraform Destroy
@@ -68,7 +68,12 @@ jobs:
     - name: Setup kubectl
       uses: azure/setup-kubectl@v1
 
-
+    - name: Download kubeconfig
+      uses: actions/download-artifact@v2
+      with:
+        name: kubeconfig
+        path: terraform-azure
+        
     - name: Check kubeconfig file
       run: ls ${{ env.KUBECONFIG }}
 
