@@ -83,7 +83,9 @@ jobs:
         cat ${{ env.KUBECONFIG }}
     
     - name: Apply Kubernetes manifest
-      run: kubectl apply -f hello-world.yml
+      run: |
+        pwd
+        kubectl apply -f hello_world.yml
   
 
     - name: Check kubeconfig file_!
