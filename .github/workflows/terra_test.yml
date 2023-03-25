@@ -43,7 +43,7 @@ jobs:
     - name: test
       run: |
           pwd
-          ll
+          ls
 
     - name: Check kubeconfig file
       run: |
