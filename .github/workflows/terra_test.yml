@@ -42,44 +42,50 @@ jobs:
 
     - name: Check kubeconfig file_!
       run: cat ${{ env.KUBECONFIG }}
+
+    - name: Upload kubeconfig artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: kubeconfig
+        path: ~/.kube/config  
      
  
+    - name: Terraform Destroy
+      if: contains(github.event.head_commit.message, 'destroy')
+      run: terraform destroy -auto-approv
+
+  terraform-CD:
+    needs: terraform-CI
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: terraform-azure
+
+    steps:
+    - name: Clon Rep
+      uses: actions/checkout@v2
+
+    - name: Setup kubectl
+      uses: azure/setup-kubectl@v1
 
 
-  #   - name: Terraform Destroy
-  #     if: contains(github.event.head_commit.message, 'destroy')
-  #     run: terraform destroy -auto-approv
+    - name: Check kubeconfig file
+      run: ls ${{ env.KUBECONFIG }}
 
-  # terraform-CD:
-  #   needs: terraform-CI
-  #   runs-on: ubuntu-latest
-  #   defaults:
-  #     run:
-  #       working-directory: terraform-azure
-
-  #   steps:
-  #   - name: Clon Rep
-  #     uses: actions/checkout@v2
-
-  #   - name: Setup kubectl
-  #     uses: azure/setup-kubectl@v1
-
-
-  #   - name: Check kubeconfig file
-  #     run: ls ${{ env.KUBECONFIG }}
-
-  #   - name: Check kubeconfig file
-  #     run: cat ${{ env.KUBECONFIG }}
+    - name: Check kubeconfig file
+      run: |
+        ls
+        cat ${{ env.KUBECONFIG }}
     
-  #   - name: Check kubeconfig file_!
-  #     run: kubectl config view 
+    - name: Check kubeconfig file_!
+      run: kubectl config view 
   
 
-  #   - name: Apply Kubernetes manifest
-  #     env:
-  #       KUBECONFIG: ${{ github.workspace }}/kubeconfig
-  #     run: |
-  #       kubectl apply -f hello-world.yml
+    # - name: Apply Kubernetes manifest
+    #   env:
+    #     KUBECONFIG: ${{ github.workspace }}/kubeconfig
+    #   run: |
+    #     kubectl apply -f hello-world.yml
 
 
 
