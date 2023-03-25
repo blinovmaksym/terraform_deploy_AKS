@@ -4,6 +4,12 @@ RESOURCE_GROUP_NAME=tfstate
 STORAGE_ACCOUNT_NAME=tfstateitsprout
 CONTAINER_NAME=tfstate
 
+# Authenticate with Azure using environment variables
+az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID
+
+# Set the subscription context
+az account set --subscription $ARM_SUBSCRIPTION_ID
+
  # Check if storage account exists
 if  az storage account show --name $STORAGE_ACCOUNT_NAME --query id --output tsv >/dev/null 2>&1; then
 echo "Storage already exist"
