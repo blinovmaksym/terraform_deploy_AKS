@@ -66,14 +66,14 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Setup kubectl
-      uses: azure/setup-kubectl@v1
+      uses: azure/setup-kubectl@v3
 
     - name: Download kubeconfig
       uses: actions/download-artifact@v2
       with:
         name: kubeconfig
         path: terraform-azure
-        
+
     - name: Check kubeconfig file
       run: ls ${{ env.KUBECONFIG }}
 
@@ -86,7 +86,8 @@ jobs:
       run: kubectl config view 
   
 
-
+    - name: Check kubeconfig file_!
+      run: kubectl get nodes
 
     # - name: Apply Kubernetes manifest
     #   env:
