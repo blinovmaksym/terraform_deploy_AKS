@@ -26,4 +26,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     type = "SystemAssigned"
   }
 }
+module "hello-world-deployment" {
+  source = "./hello-world-deployment.tf"
+}
 
