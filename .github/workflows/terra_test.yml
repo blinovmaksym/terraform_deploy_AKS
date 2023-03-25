@@ -40,9 +40,6 @@ jobs:
       if: "!contains(github.event.head_commit.message, 'destroy')"
       run: terraform apply -auto-approve
 
-    - name: Check kubeconfig file_!
-      run: cat ${{ env.KUBECONFIG }}
-
     - name: Upload kubeconfig artifact
       uses: actions/upload-artifact@v2
       with:
@@ -52,7 +49,7 @@ jobs:
  
     - name: Terraform Destroy
       if: contains(github.event.head_commit.message, 'destroy')
-      run: terraform destroy -auto-approv
+      run: terraform destroy -auto-approve
 
   terraform-CD:
     needs: terraform-CI
@@ -73,26 +70,14 @@ jobs:
       with:
         name: kubeconfig
         path: terraform-azure
-
-    - name: Check kubeconfig file
-      run: ls ${{ env.KUBECONFIG }}
-
-    - name: Check kubeconfig file
-      run: |
-        ls
-        cat ${{ env.KUBECONFIG }}
     
     - name: Apply Kubernetes manifest
-      run: |
-        pwd
-        ls
-        kubectl apply -f hello_world.yml
+      run: kubectl apply -f hello_world.yml
   
+    - name: Wait for 15 seconds()
+      run: sleep 15s
 
-    - name: Check kubeconfig file_!
-      run: kubectl get nodes
-
-    - name: Apply Kubernetes manifest
+    - name: Check Service
       run: kubectl get service
 
 
