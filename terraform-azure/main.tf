@@ -19,9 +19,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
     enable_auto_scaling = false
   }
     
-    
-
-
   identity {
     type = "SystemAssigned"
   }
