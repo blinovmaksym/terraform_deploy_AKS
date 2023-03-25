@@ -12,7 +12,7 @@ env:
   ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
   ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-  KUBECONFIG: $${{ github.workspace }}/kubeconfig
+  KUBECONFIG: ${{ github.workspace }}/kubeconfig
 jobs:
   terraform-CI:
     runs-on: ubuntu-latest
