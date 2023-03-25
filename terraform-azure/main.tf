@@ -11,13 +11,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
 
 
-  default_node_pool {│ Error: Reference to undeclared resource
-│ 
-│   on main.tf line 28, in resource "local_file" "kubeconfig":
-│   28:   content  = azurerm_kubernetes_cluster.aks-rg.kube_config_raw
-│ 
-│ A managed resource "azurerm_kubernetes_cluster" "aks-rg" has not been
-│ declared in the root module.
+  default_node_pool {
     name                = "system"
     node_count          = var.system_node_count
     vm_size             = "Standard_DS2_v2"
