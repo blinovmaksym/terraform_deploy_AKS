@@ -1,6 +1,9 @@
 name: test
 on:
   push:
+    paths:
+      - 'terraform-azure/**'
+      - '.github/workflows/terra_test.yml'
     branches:
       - main
  
