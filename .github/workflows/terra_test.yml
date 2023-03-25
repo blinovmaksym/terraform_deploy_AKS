@@ -40,7 +40,6 @@ jobs:
       run: terraform apply -auto-approve
 
     - name: ttest
-      id: plan
       run: ls -l
       
 
