@@ -41,7 +41,9 @@ jobs:
       run: terraform apply -auto-approve
 
     - name: test
-      run: ls 
+      run: |
+          pwd
+          ll
 
     - name: Check kubeconfig file
       run: |
