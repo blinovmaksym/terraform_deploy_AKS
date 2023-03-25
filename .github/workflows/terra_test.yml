@@ -58,6 +58,8 @@ jobs:
       uses: azure/setup-kubectl@v1
 
     - name: Apply Kubernetes manifest
+      env:
+        KUBECONFIG: ${{ github.workspace }}/kubeconfig
       run: |
         kubectl apply -f hello-world.yml
 
