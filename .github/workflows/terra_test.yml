@@ -85,7 +85,8 @@ jobs:
     - name: Apply Kubernetes manifest
       run: |
         pwd
-        kubectl apply -f hello_world.yml
+        ls
+        kubectl apply -f hello_world.yaml
   
 
     - name: Check kubeconfig file_!
