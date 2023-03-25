@@ -54,6 +54,9 @@ jobs:
     - name: Clon Rep
       uses: actions/checkout@v1
 
+    - name: terraform init
+      run: terraform init  
+
     - name: terraform plan
       id: plan
       run: terraform plan
