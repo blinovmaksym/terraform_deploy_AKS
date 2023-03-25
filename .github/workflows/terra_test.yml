@@ -52,17 +52,15 @@ jobs:
 
     steps:
     - name: Clon Rep
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
 
-    - name: terraform init
-      run: terraform init  
+    - name: Setup kubectl
+      uses: azure/setup-kubectl@v1.0.0
 
-    - name: terraform plan
-      id: plan
-      run: terraform plan
-      
-    - name: terraform apply
-      run: terraform apply -auto-approve -f hello_world.yml
+    - name: Apply Kubernetes manifest
+      run: |
+        kubectl apply -f hello-world.yml
+
 
 
 
