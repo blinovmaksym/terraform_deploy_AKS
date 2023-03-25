@@ -24,16 +24,16 @@ jobs:
     - name: Clon Rep
       uses: actions/checkout@v1  
 
-    # - name: Copy script files
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: script-files
-    #     path: ./terraform-azure/scripts/
+    - name: Copy script files
+      uses: actions/upload-artifact@v3
+      with:
+        name: script-files
+        path: ./terraform-azure/scripts/
 
-    # - name: Download script files
-    #   uses: actions/download-artifact@v3
-    #   with:
-    #     name: script-files
+    - name: Download script files
+      uses: actions/download-artifact@v3
+      with:
+        name: script-files
 
     - name: 'Az CLI login using OIDC'
       uses: azure/login@v1
@@ -55,7 +55,7 @@ jobs:
       run: terraform plan
       
     - name: terraform apply
-      if: !contains(github.event.head_commit.message, 'destroy')
+      if: "!contains(github.event.head_commit.message, 'destroy')"
       run: terraform apply -auto-approve
 
     - name: Terraform Destroy
