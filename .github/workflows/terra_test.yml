@@ -44,7 +44,9 @@ jobs:
       run: ls 
 
     - name: Check kubeconfig file
-      run: ls ${{ env.KUBECONFIG }}
+      run: |
+          cd terraform-azure
+          ls ${path.module}/kubeconfig
 
     - name: Check kubeconfig file
       run: cat ${{ env.KUBECONFIG }}
