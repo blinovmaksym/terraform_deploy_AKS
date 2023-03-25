@@ -76,7 +76,7 @@ jobs:
       run: kubectl apply -f hello_world.yml
   
     - name: Wait for 15 seconds()
-      run: sleep 15s
+      run: sleep 20s
 
     - name: Check Service
       run: kubectl get service
