@@ -52,7 +52,7 @@ jobs:
 
     - name: Verify kubeconfig file exists
       run: |
-        cd .terraform-azure
+        cd terraform-azure/
         ls -la ${{ env.KUBECONFIG }}
     
 
