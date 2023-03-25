@@ -40,20 +40,6 @@ jobs:
       if: "!contains(github.event.head_commit.message, 'destroy')"
       run: terraform apply -auto-approve
 
-    - name: test
-      run: |
-          pwd
-          ls
-
-    - name: Check kubeconfig file
-      run: |
-          pwd
-          ls kubeconfig
-
-    - name: Verify kubeconfig file exists
-      run: ls -la ${{ env.KUBECONFIG }}
-    
-
     - name: Check kubeconfig file_!
       run: cat ${{ env.KUBECONFIG }}
      
