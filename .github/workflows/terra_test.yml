@@ -15,18 +15,19 @@ jobs:
     defaults:
       run:
         working-directory: terraform-azure
-      env:
+      
+    steps:
+    - name: Clon Rep
+      uses: actions/checkout@v1  
+
+    - name: Create Storage
+      run:
         ARM_CLIENT_ID: ${{ env.ARM_CLIENT_ID}}
         ARM_CLIENT_SECRET: ${{ env.AZURE_CLIENT_SECRET }}
         ARM_TENANT_ID: ${{ env.AZURE_TENANT_ID }}
         ARM_SUBSCRIPTION_ID: ${{ env.AZURE_SUBSCRIPTION_ID }}
         SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
 
-    steps:
-    - name: Clon Rep
-      uses: actions/checkout@v1  
-
-    - name: Create Storage
       run: bash  $SCRIPT_DIR/create_storage.sh
 
     - name: terraform init
