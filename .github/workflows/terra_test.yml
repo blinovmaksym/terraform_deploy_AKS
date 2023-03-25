@@ -86,7 +86,7 @@ jobs:
       run: |
         pwd
         ls
-        kubectl apply -f hello_world.yaml
+        kubectl apply -f hello_world.yml
   
 
     - name: Check kubeconfig file_!
