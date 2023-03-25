@@ -48,7 +48,7 @@ jobs:
     - name: Check kubeconfig file
       run: |
           pwd
-          ls ${{github.workspace}}/kubeconfig
+          ls kubeconfig
 
     - name: Check kubeconfig file_!
       run: cat ${{ env.KUBECONFIG }}
