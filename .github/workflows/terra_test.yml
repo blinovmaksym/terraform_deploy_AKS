@@ -57,6 +57,10 @@ jobs:
     - name: Setup kubectl
       uses: azure/setup-kubectl@v1
 
+
+    - name: Check kubeconfig file
+      run: ls ${{ env.KUBECONFIG }}
+
     - name: Check kubeconfig file
       run: cat ${{ env.KUBECONFIG }}
     
