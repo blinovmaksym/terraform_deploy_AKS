@@ -81,6 +81,8 @@ jobs:
       run: kubectl config view 
   
 
+
+
     # - name: Apply Kubernetes manifest
     #   env:
     #     KUBECONFIG: ${{ github.workspace }}/kubeconfig
