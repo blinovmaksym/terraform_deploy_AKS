@@ -71,6 +71,7 @@ jobs:
       with:
         name: kubeconfig
         path: terraform-azure
+        
     
     - name: Apply Kubernetes manifest
       run: kubectl apply -f hello_world.yml
