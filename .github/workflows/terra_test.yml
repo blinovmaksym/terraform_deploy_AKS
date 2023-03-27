@@ -25,7 +25,7 @@ jobs:
       
     steps:
     - name: Clon Rep
-      uses: actions/checkout@v1  
+      uses: actions/checkout@v3  
 
     - name: Create Storage
       env:
@@ -69,14 +69,14 @@ jobs:
       uses: azure/setup-kubectl@v3
 
     - name: Download kubeconfig
-      if: "!contains(github.event.head_commit.message, 'destroy')"
+      # if: "!contains(github.event.head_commit.message, 'destroy')"
       uses: actions/download-artifact@v2
       with:
         name: kubeconfig
         path: terraform-azure
    
     - name: Apply Kubernetes manifest
-      run: kubectl apply -f hello_world.yml
+      run: kubectl apply -f azure-vote.yml
   
     - name: Wait for 15 seconds()
       run: sleep 20s
