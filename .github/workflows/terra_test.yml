@@ -1,9 +1,12 @@
 name: test
+# on:
+#   push:
+#     paths:
+#       - 'terraform-azure/**'
+#       - '.github/workflows/terra_test.yml'
 on:
-  push:
-    paths:
-      - 'terraform-azure/**'
-      - '.github/workflows/terra_test.yml'
+  workflow_dispatch:
+    
     branches:
       - main
  
