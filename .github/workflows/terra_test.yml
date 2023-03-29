@@ -4,11 +4,11 @@ on:
     paths:
       - 'terraform-azure/**'
       - '.github/workflows/terra_test.yml'
-# on:
-#   workflow_dispatch:
-    
     branches:
-      - main
+      - main  
+  workflow_dispatch:
+    
+    
  
 env:
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
