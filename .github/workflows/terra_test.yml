@@ -76,7 +76,7 @@ jobs:
         path: terraform-azure
    
     - name: Apply Kubernetes manifest
-      run: kubectl apply -f init_db.ymls
+      run: kubectl apply -f init_db.yml
 
     - name: Wait for 15 seconds()
       run: sleep 20s
