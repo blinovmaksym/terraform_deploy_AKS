@@ -20,9 +20,30 @@ resource "azurerm_kubernetes_cluster" "aks" {
   identity {
     type = "SystemAssigned"
   }
-  
+
 }
 resource "local_file" "kubeconfig" {
   filename = "${path.module}/kubeconfig"
   content  = azurerm_kubernetes_cluster.aks.kube_config_raw
+}
+# Create MySql Server 
+resource "azurerm_mysql_server" "product" {
+  name                = "mysql-wp"
+  location            = azurerm_resource_group.product.location
+  resource_group_name = azurerm_resource_group.product.name
+
+  administrator_login          = "mysqladmin"
+  administrator_login_password = "1-qwerty"
+
+  sku_name   = "B_Gen5_2"
+  storage_mb = 5120
+  version    = "5.7"
+
+  auto_grow_enabled                 = true
+  backup_retention_days             = 30
+  geo_redundant_backup_enabled      = false
+  infrastructure_encryption_enabled = false
+  public_network_access_enabled     = true
+  ssl_enforcement_enabled           = true
+  ssl_minimal_tls_version_enforced  = "TLS1_2"
 }
