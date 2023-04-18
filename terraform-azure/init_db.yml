@@ -15,6 +15,9 @@ spec:
       containers:
       - name: mysql
         image: maksymblinov/init_db:v1
+        # volumeMounts:
+        # - name: www
+        #   mountPath: /var/www/html
         ports:
         - containerPort: 3306
 ---
@@ -35,6 +38,9 @@ spec:
       containers:
       - name: wordpress
         image: wordpress:latest
+        # volumeMounts:
+        # - name: www
+        #   mountPath: /var/www/html
         env:
         - name: WORDPRESS_DB_HOST
           value: "mysql-wpmax.mysql.database.azure.com"
