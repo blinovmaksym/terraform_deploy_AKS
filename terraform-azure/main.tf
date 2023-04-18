@@ -58,10 +58,11 @@ resource "azurerm_mysql_server" "aks-bd" {
 #   administrator_login_password = "1-qwerty"
 #   minimum_tls_version          = "1.2"
 # }
-# resource "azurerm_mssql_firewall_rule" "aks-bd_sprout" {
-#   name                = "AllowAllIPs"
-#   server_id         = azurerm_mssql_server.aks-bd_sprout.id
-#   start_ip_address    = "0.0.0.0"
-#   end_ip_address      = "255.255.255.255"
-# }
+resource "azurerm_mysql_firewall_rule" "aks-bd_sprout" {
+  name                = "AllowAllIPs"
+  resource_group_name = azurerm_resource_group.aks-rg.name
+  server_name         = azurerm_mysql_server.aks-bd.name
+  start_ip_address    = "0.0.0.0"
+  end_ip_address      = "255.255.255.255"
+}
 
