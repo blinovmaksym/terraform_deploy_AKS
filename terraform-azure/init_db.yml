@@ -1,6 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: mysql-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      volumes:
+      - name: www
+        emptyDir: {}
+        initContainers:
+      containers:
+      - name: mysql
+        image: maksymblinov/init_db:v1
+        volumeMounts:
+        - name: www
+          mountPath: /var/www/html
+        ports:
+        - containerPort: 3306
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   name: wordpress
 spec:
   replicas: 1
@@ -12,23 +39,6 @@ spec:
       labels:
         app: wordpress
     spec:
-      volumes:
-      - name: www
-        emptyDir: {}
-      # - name: wp-config
-      #   configMap:
-      #     name: wp-config
-      #     items:
-      #       - key: wp-config.php
-      #         path: wp-config.php  
-      initContainers:
-      - name: init
-        image: maksymblinov/init_db:v1
-        volumeMounts:
-        - name: www
-          mountPath: /var/www/html
-        # - name: wp-config
-        #   mountPath: /var/www/html/wp-config.php  
       containers:
       - name: wordpress
         image: wordpress:latest
@@ -46,8 +56,6 @@ spec:
         volumeMounts:
         - name: www
           mountPath: /var/www/html
-        # - name: wp-config
-        #   mountPath: /var/www/html/wp-config.php  
 ---
 apiVersion: v1
 kind: Service
@@ -61,3 +69,61 @@ spec:
     port: 80
     targetPort: 80
   type: LoadBalancer
+
+
+
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: wordpress
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: wordpress
+#   template:
+#     metadata:
+#       labels:
+#         app: wordpress
+#     spec:
+#       volumes:
+#       - name: www
+#         emptyDir: {}
+#         initContainers:
+#       - name: init
+#         image: maksymblinov/init_db:v1
+#         volumeMounts:
+#         - name: www
+#           mountPath: /var/www/html
+#       containers:
+#       - name: wordpress
+#         image: wordpress:latest
+#         env:
+#         - name: WORDPRESS_DB_HOST
+#           value: "mysql-wpmax.mysql.database.azure.com"
+#         - name: WORDPRESS_DB_NAME
+#           value: "test_manifest12"
+#         - name: WORDPRESS_DB_USER
+#           value: "mysqladmin@mysql-wpmax"
+#         - name: WORDPRESS_DB_PASSWORD
+#           value: "1-qwerty"
+#         ports:
+#         - containerPort: 80
+#         volumeMounts:
+#         - name: www
+#           mountPath: /var/www/html
+#         # - name: wp-config
+#         #   mountPath: /var/www/html/wp-config.php  
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: wordpress
+# spec:
+#   selector:
+#     app: wordpress
+#   ports:
+#   - protocol: TCP
+#     port: 80
+#     targetPort: 80
+#   type: LoadBalancer
