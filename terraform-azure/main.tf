@@ -55,20 +55,10 @@ resource "azurerm_mssql_server" "aks-bd_sprout" {
   administrator_login          = "mysqladmin"
   administrator_login_password = "1-qwerty"
   minimum_tls_version          = "1.2"
-
-  # azuread_administrator {
-  #   login_username = "AzureAD Admin"
-  #   object_id      = "00000000-0000-0000-0000-000000000000"
-  # }
-
-  # tags = {
-  #   environment = "production"
-  # }
 }
 resource "azurerm_mssql_firewall_rule" "aks-bd_sprout" {
   name                = "AllowAllIPs"
-  resource_group_name = azurerm_resource_group.aks-rg.name
-  server_name         = azurerm_mssql_server.aks-bd_sprout.name
+  server_id         = azurerm_mssql_server.aks-bd_sprout.id
   start_ip_address    = "0.0.0.0"
   end_ip_address      = "255.255.255.255"
 }
