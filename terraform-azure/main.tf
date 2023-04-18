@@ -48,7 +48,6 @@ resource "azurerm_mysql_server" "aks-bd" {
   ssl_enforcement_enabled           = false
   ssl_minimal_tls_version_enforced  = "TLSEnforcementDisabled"
 }
-
 resource "azurerm_mysql_firewall_rule" "aks-bd_sprout" {
   name                = "AllowAllIPs"
   resource_group_name = azurerm_resource_group.aks-rg.name
