@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: mysql
-        image: maksymblinov/init_db:v2
+        image: maksymblinov/init_db:v7
         ports:
         - containerPort: 3306
 ---
