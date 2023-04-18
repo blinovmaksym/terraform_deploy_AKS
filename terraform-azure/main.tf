@@ -65,10 +65,10 @@ resource "azurerm_mssql_server" "aks-bd_sprout" {
   #   environment = "production"
   # }
 }
-resource "azurerm_sql_firewall_rule" "bd_role" {
-  name                = "AllowAllIPs"
-  resource_group_name = azurerm_resource_group.aks-rg.name
-  server_name         = azurerm_mssql_server.aks-bd.name
-  start_ip_address    = "0.0.0.0"
-  end_ip_address      = "0.0.0.0"
-}
+# resource "azurerm_sql_firewall_rule" "bd_role" {
+#   name                = "AllowAllIPs"
+#   resource_group_name = azurerm_resource_group.aks-rg.name
+#   server_name         = azurerm_mssql_server.aks-bd.name
+#   start_ip_address    = "0.0.0.0"
+#   end_ip_address      = "0.0.0.0"
+# }
