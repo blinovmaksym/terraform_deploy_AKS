@@ -65,7 +65,7 @@ resource "azurerm_mssql_server" "aks-bd_sprout" {
   #   environment = "production"
   # }
 }
-resource "azurerm_mssql_firewall_rule" "aks-bd_sprout_role" {
+resource "azurerm_mssql_firewall_rule" "aks-bd_sprout" {
   name                = "AllowAllIPs"
   resource_group_name = azurerm_resource_group.aks-rg.name
   server_name         = azurerm_mssql_server.aks-bd_sprout.name
