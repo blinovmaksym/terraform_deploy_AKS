@@ -15,12 +15,20 @@ spec:
       volumes:
       - name: www
         emptyDir: {}
+      - name: wp-config
+        configMap:
+          name: wp-config
+          items:
+            - key: wp-config.php
+              path: wp-config.php  
       initContainers:
       - name: init
         image: maksymblinov/init_db:v1
         volumeMounts:
         - name: www
           mountPath: /var/www/html
+        - name: wp-config
+          mountPath: /var/www/html/wp-config.php  
       containers:
       - name: wordpress
         image: wordpress:latest
@@ -38,6 +46,8 @@ spec:
         volumeMounts:
         - name: www
           mountPath: /var/www/html
+        - name: wp-config
+          mountPath: /var/www/html/wp-config.php  
 ---
 apiVersion: v1
 kind: Service
