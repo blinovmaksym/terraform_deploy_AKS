@@ -36,8 +36,8 @@ spec:
         ports:
         - containerPort: 80
         volumes:
-      - name: shared-data
-        emptyDir: {}
+        - name: shared-data
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
