@@ -34,6 +34,7 @@ CMD mysql -h $SERVER_NAME -u $USER_NAME -p$PASSWORD -P 3306 -e "\
   --dbuser=mysqladmin@mysql-wpmax \
   --dbpass=1-qwerty \
   --allow-root && \
+  COPY wp-config.php /var/www/html/ && \
   wp --allow-root core install \
     --url=http://localhost \
     --title=MyWebsite \
