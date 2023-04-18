@@ -20,6 +20,8 @@ spec:
         #   mountPath: /var/www/html
         ports:
         - containerPort: 3306
+
+        
 ---
 apiVersion: apps/v1
 kind: Deployment
