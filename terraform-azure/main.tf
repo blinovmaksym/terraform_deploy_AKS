@@ -48,7 +48,7 @@ resource "local_file" "kubeconfig" {
 #   ssl_minimal_tls_version_enforced  = "TLS1_2"
 # }
 resource "azurerm_mssql_server" "aks-bd_sprout" {
-  name                         = "mssqlserver"
+  name                         = "mssqlserver_sprout"
   resource_group_name          = azurerm_resource_group.aks-rg.name
   location                     = azurerm_resource_group.aks-rg.location
   version                      = "12.0"
@@ -65,10 +65,11 @@ resource "azurerm_mssql_server" "aks-bd_sprout" {
   #   environment = "production"
   # }
 }
-# resource "azurerm_sql_firewall_rule" "bd_role" {
-#   name                = "AllowAllIPs"
-#   resource_group_name = azurerm_resource_group.aks-rg.name
-#   server_name         = azurerm_mssql_server.aks-bd.name
-#   start_ip_address    = "0.0.0.0"
-#   end_ip_address      = "0.0.0.0"
-# }
+resource "azurerm_mssql_firewall_rule" "aks-bd_sprout_role" {
+  name                = "AllowAllIPs"
+  resource_group_name = azurerm_resource_group.aks-rg.name
+  server_name         = azurerm_mssql_server.aks-bd_sprout.name
+  start_ip_address    = "0.0.0.0"
+  end_ip_address      = "255.255.255.255"
+}
+
