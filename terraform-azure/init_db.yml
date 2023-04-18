@@ -35,9 +35,9 @@ spec:
           value: "1-qwerty"
         ports:
         - containerPort: 80
-        volumes:
-        - name: shared-data
-          emptyDir: {}
+      volumes:
+      - name: shared-data
+        emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
