@@ -20,7 +20,7 @@ spec:
         image: maksymblinov/init_db:v1
         volumeMounts:
         - name: www
-          mountPath: /var/www
+          mountPath: /var/www/html
       containers:
       - name: wordpress
         image: wordpress:latest
@@ -37,7 +37,7 @@ spec:
         - containerPort: 80
         volumeMounts:
         - name: www
-          mountPath: /var/www
+          mountPath: /var/www/html
 ---
 apiVersion: v1
 kind: Service
