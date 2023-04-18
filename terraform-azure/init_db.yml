@@ -38,6 +38,8 @@ spec:
         env:
         - name: WORDPRESS_DB_HOST
           value: "mysql-wpmax.mysql.database.azure.com"
+        - name: WORDPRESS_DB_NAME
+          value: "test_manifest12"
         - name: WORDPRESS_DB_USER
           value: "mysqladmin@mysql-wpmax"
         - name: WORDPRESS_DB_PASSWORD
