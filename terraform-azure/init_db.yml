@@ -35,10 +35,7 @@ spec:
           value: "1-qwerty"
         ports:
         - containerPort: 80
-          volumeMounts:
-        - name: shared-data
-          mountPath: /var/www/html
-      volumes:
+        volumes:
       - name: shared-data
         emptyDir: {}
 ---
