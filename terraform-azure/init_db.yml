@@ -46,4 +46,16 @@ spec:
           value: ""
         - name: WORDPRESS_DB_NAME
           value: wordpress
-
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress
+spec:
+  selector:
+    app: wordpress
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
