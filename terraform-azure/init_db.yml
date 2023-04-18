@@ -12,18 +12,18 @@ spec:
       labels:
         app: wordpress
     spec:
+      volumes:
+      - name: www
+        emptyDir: {}
       initContainers:
       - name: init
-        image:  maksymblinov/init_db:v1
+        image: maksymblinov/init_db:v1
         volumeMounts:
-        - name: shared-data
-          mountPath: /var/www/html
+        - name: www
+          mountPath: /var/www
       containers:
       - name: wordpress
         image: wordpress:latest
-        volumeMounts:
-        - name: shared-data
-          mountPath: /var/www/html
         env:
         - name: WORDPRESS_DB_HOST
           value: "mysql-wpmax.mysql.database.azure.com"
@@ -35,9 +35,9 @@ spec:
           value: "1-qwerty"
         ports:
         - containerPort: 80
-      volumes:
-      - name: shared-data
-        emptyDir: {}
+        volumeMounts:
+        - name: www
+          mountPath: /var/www
 ---
 apiVersion: v1
 kind: Service
