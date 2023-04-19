@@ -12,16 +12,24 @@ spec:
       labels:
         app: wordpress
     spec:
-      volumes:
-      - name: www
-        emptyDir: {}
+...
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec:
       initContainers:
       - name: init
         image: maksymblinov/init_db:v1
+        command: ["sh", "-c", "sleep 200 && touch /var/www/html/.ready"]
         volumeMounts:
         - name: www
           mountPath: /var/www/html
-        command: ["sh", "-c", "sleep 200 && touch /var/www/html/.ready"]  
       containers:
       - name: wordpress
         image: wordpress:latest
@@ -47,7 +55,12 @@ spec:
             - "[ -f /var/www/html/.ready ]"
           periodSeconds: 5
           initialDelaySeconds: 5
-          failureThreshold: 10  
+          failureThreshold: 10 
+        volumes:
+        - name: www
+          emptyDir: {}
+...
+
 
 ---
 apiVersion: v1
