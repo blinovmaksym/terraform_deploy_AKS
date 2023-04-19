@@ -29,7 +29,6 @@ CMD mysql -h $SERVER_NAME -u $USER_NAME -p$PASSWORD -P 3306 -e "\
     CREATE TABLE IF NOT EXISTS my_table (id INT PRIMARY KEY, name VARCHAR(50)); \
     INSERT IGNORE  INTO my_table (id, name) VALUES (1, 'John'), (2, 'Jane'), (3, 'Joe');" &&\
 # Configure WP-CLI and install plugins and themes
-# Configure WP-CLI and install plugins and themes
 wp core download --path=/var/www/html --allow-root && \
 wp --allow-root --path=/var/www/html config create \
   --dbhost=mysql-wpmax.mysql.database.azure.com \
@@ -38,13 +37,13 @@ wp --allow-root --path=/var/www/html config create \
   --dbpass=1-qwerty \
   --allow-root && \
 wp --allow-root --path=/var/www/html core install \
-  --url=http://localhost \
-  --title=MyWebsite \
+  --url=http://20.7.105.147 \
+  --title=WP_team \
   --admin_user=admin \
   --admin_password=admin \
   --admin_email=admin@example.com  &&\
-wp --allow-root --path=/var/www/html plugin install contact-form-7 --activate && \
-wp --allow-root --path=/var/www/html theme install twentyseventeen && \
-wp --allow-root --path=/var/www/html theme activate twentyseventeen
+wp  plugin install contact-form-7 --activate && \
+wp  theme install astra && \
+wp  theme activate astra
 
  
