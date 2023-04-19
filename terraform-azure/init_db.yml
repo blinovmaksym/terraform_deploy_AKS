@@ -12,14 +12,7 @@ spec:
   storageClassName: local-storage
   local:
     path: /var/www/html
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: kubernetes.io/hostname
-          operator: In
-          values:
-          - kub-node-1
+
 ---    
 
 kind: PersistentVolumeClaim
