@@ -42,7 +42,7 @@ spec:
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: task-pv-volume
+            claimName: task-pv-claim
       initContainers:
         - name: init
           image: maksymblinov/init_db:v1
