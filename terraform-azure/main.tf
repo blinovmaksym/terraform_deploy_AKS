@@ -24,10 +24,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
 
-
-
-
-
 }
 resource "local_file" "kubeconfig" {
   filename = "${path.module}/kubeconfig"
