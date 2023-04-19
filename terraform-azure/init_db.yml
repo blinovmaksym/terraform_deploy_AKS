@@ -17,7 +17,7 @@ spec:
         image: maksymblinov/init_db:v1
         command: ["sh", "-c", "sleep 200 && touch /var/www/html/.ready"]
         volumeMounts:
-        - name: www
+        - name: data
           mountPath: /var/www/html
       containers:
       - name: wordpress
@@ -34,7 +34,7 @@ spec:
         ports:
         - containerPort: 80
         volumeMounts:
-        - name: www
+        - name: data
           mountPath: /var/www/html
         readinessProbe:
           exec:
@@ -45,9 +45,7 @@ spec:
           periodSeconds: 5
           initialDelaySeconds: 5
           failureThreshold: 10 
-      volumes:
-        - name: www
-          emptyDir: {}
+
 ---
 apiVersion: v1
 kind: Service
@@ -61,3 +59,12 @@ spec:
     port: 80
     targetPort: 80
   type: LoadBalancer
+---
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 1Gi
