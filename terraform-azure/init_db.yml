@@ -89,7 +89,7 @@ spec:
       volumes:
       - name: www
         emptyDir: {}
-        initContainers:
+      initContainers:
       - name: init
         image: maksymblinov/init_db:v1
         volumeMounts:
