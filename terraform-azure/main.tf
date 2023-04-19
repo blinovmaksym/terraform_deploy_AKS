@@ -16,8 +16,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     type                = "VirtualMachineScaleSets"
     enable_auto_scaling = false
   }
-   
-   
+     
 
   identity {
     type = "SystemAssigned"
