@@ -69,7 +69,7 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sleep", "200"]     
+                command: ["/bin/sleep", "100"]     
           
 ---
 apiVersion: v1
