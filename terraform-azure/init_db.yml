@@ -45,7 +45,7 @@ spec:
             claimName: task-pv-claim
       initContainers:
         - name: init
-          image: maksymblinov/init_db:v1
+          image: maksymblinov/init_db:v2
           volumeMounts:
               - mountPath: /var/www/html
                 name: data
