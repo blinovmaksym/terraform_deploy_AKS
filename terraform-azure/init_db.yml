@@ -1,3 +1,39 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-local-node-1
+spec:
+  capacity:
+    storage: 2Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /var/www/html
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - kub-node-1
+---    
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: local-volume
+spec:
+  storageClassName: "local-storage"
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,7 +51,7 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: data
+          claimName: local-volume
       initContainers:
       - name: init
         image: maksymblinov/init_db:v1
@@ -62,12 +98,3 @@ spec:
     port: 80
     targetPort: 80
   type: LoadBalancer
----
-volumeClaimTemplates:
-- metadata:
-    name: data
-  spec:
-    accessModes: ["ReadWriteOnce"]
-    resources:
-      requests:
-        storage: 1Gi
