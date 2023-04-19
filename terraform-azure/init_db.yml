@@ -71,7 +71,6 @@
 #   type: LoadBalancer
 
 
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -95,7 +94,7 @@ spec:
         volumeMounts:
         - name: www
           mountPath: /var/www/html
-        terminationGracePeriodSeconds: 200  
+        terminationGracePeriodSeconds: 200
       containers:
       - name: wordpress
         image: wordpress:latest
@@ -113,8 +112,6 @@ spec:
         volumeMounts:
         - name: www
           mountPath: /var/www/html
-        # - name: wp-config
-        #   mountPath: /var/www/html/wp-config.php  
 ---
 apiVersion: v1
 kind: Service
