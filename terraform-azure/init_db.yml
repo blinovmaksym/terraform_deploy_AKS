@@ -45,7 +45,7 @@ spec:
           periodSeconds: 5
           initialDelaySeconds: 5
           failureThreshold: 10 
-        volumes:
+      volumes:
         - name: www
           emptyDir: {}
 ---
