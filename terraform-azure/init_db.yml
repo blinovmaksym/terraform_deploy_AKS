@@ -11,7 +11,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /var/www/htmlы
+    path: /var/www/html
   nodeAffinity:
     required:
       nodeSelectorTerms:
