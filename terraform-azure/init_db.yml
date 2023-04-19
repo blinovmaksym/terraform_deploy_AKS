@@ -94,7 +94,6 @@ spec:
         volumeMounts:
         - name: www
           mountPath: /var/www/html
-        terminationGracePeriodSeconds: 200
       containers:
       - name: wordpress
         image: wordpress:latest
@@ -112,6 +111,7 @@ spec:
         volumeMounts:
         - name: www
           mountPath: /var/www/html
+    terminationGracePeriodSeconds: 200
 ---
 apiVersion: v1
 kind: Service
