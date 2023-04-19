@@ -15,7 +15,6 @@ spec:
       volumes:
       - name: www
         emptyDir: {}
-        initContainers:
       containers:
       - name: mysql
         image: maksymblinov/init_db:v1
@@ -24,22 +23,6 @@ spec:
           mountPath: /var/www/html
         ports:
         - containerPort: 3306
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: wordpress
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: wordpress
-  template:
-    metadata:
-      labels:
-        app: wordpress
-    spec:
-      containers:
       - name: wordpress
         image: wordpress:latest
         env:
@@ -55,7 +38,7 @@ spec:
         - containerPort: 80
         volumeMounts:
         - name: www
-          mountPath: /var/www/html
+          mountPath: /var/www/html      
 ---
 apiVersion: v1
 kind: Service
