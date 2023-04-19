@@ -39,17 +39,17 @@ spec:
       labels:
         app: wordpress
     spec:
-      volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: task-pv-claim
+      # volumes:
+      #   - name: data
+      #     persistentVolumeClaim:
+      #       claimName: task-pv-claim
       initContainers:
         - name: init
           image: maksymblinov/init_db:v1
           command: ["sh", "-c", "sleep 200 && touch /var/www/html/.ready"]
-          volumeMounts:
-              - mountPath: /var/www/html
-                name: data
+          # volumeMounts:
+          #     - mountPath: /var/www/html
+          #       name: data
       containers:
         - name: wordpress
           image: wordpress:latest
@@ -64,9 +64,9 @@ spec:
               value: "1-qwerty"
           ports:
             - containerPort: 80
-          volumeMounts:
-            - mountPath: /var/www/html
-              name: data
+          # volumeMounts:
+          #   - mountPath: /var/www/html
+          #     name: data
           readinessProbe:
             exec:
               command:
