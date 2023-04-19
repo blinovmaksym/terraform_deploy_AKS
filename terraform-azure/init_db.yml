@@ -12,17 +12,6 @@ spec:
       labels:
         app: wordpress
     spec:
-...
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: wordpress
-  template:
-    metadata:
-      labels:
-        app: wordpress
-    spec:
       initContainers:
       - name: init
         image: maksymblinov/init_db:v1
