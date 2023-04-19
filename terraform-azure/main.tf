@@ -30,8 +30,6 @@ resource "local_file" "kubeconfig" {
   content  = azurerm_kubernetes_cluster.aks.kube_config_raw
 }
 
-
-
 # Create MySql Server 
 resource "azurerm_mysql_server" "aks-bd" {
   name                = "mysql-wpmax"
