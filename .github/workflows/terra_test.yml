@@ -57,7 +57,8 @@ jobs:
 
   Build-and-push-DockerImage:
     needs: terraform-CI
-    if: github.event_name == 'push' && contains(github.event.head_commit.modified_files, 'Dockerfile') && contains(github.event.head_commit.modified_files, 'setup-wp.sh')
+    if: github.event_name == 'push' && (contains(github.event.head_commit.modified_files, 'Dockerfile') || contains(github.event.head_commit.modified_files, 'setup-wp.sh'))
+
 
     runs-on: ubuntu-latest
     steps:

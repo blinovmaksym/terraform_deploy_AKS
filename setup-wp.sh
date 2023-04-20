@@ -1,6 +1,8 @@
 #!/bin/sh
 
 
+
+
 mysql -h $SERVER_NAME -u $USER_NAME -p$PASSWORD -P 3306 -e "\
    CREATE DATABASE IF NOT EXISTS test_manifest12; \
     USE test_manifest12; \
