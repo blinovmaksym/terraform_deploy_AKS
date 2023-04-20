@@ -29,11 +29,5 @@ else
       --admin_email=admin@example.com && \
     wp --allow-root --path=/var/www/html plugin install contact-form-7 --activate && \
     wp --allow-root --path=/var/www/html theme install twentytwentytwo  && \
-    wp --allow-root --path=/var/www/html theme activate twentytwentytwo 
-
-
-
-
-
-    
+    wp --allow-root --path=/var/www/html theme activate twentytwentytwo     
 fi
