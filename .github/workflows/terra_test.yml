@@ -59,7 +59,6 @@ jobs:
     needs: terraform-CI
     if: github.event_name == 'push' && (contains(github.event.head_commit.modified_files, 'Dockerfile') || contains(github.event.head_commit.modified_files, 'setup-wp.sh'))
 
-
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -84,7 +83,8 @@ jobs:
     needs: 
       - terraform-CI
       - Build-and-push-DockerImage 
-    if: "!contains(github.event.head_commit.message, 'destroy') || always()"
+    if: "!contains(github.event.head_commit.message, 'destroy')
+    # || always()"
     runs-on: ubuntu-latest
     defaults:
       run:

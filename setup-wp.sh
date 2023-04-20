@@ -30,5 +30,6 @@ else
     wp --allow-root --path=/var/www/html plugin install contact-form-7 --activate && \
     wp --allow-root --path=/var/www/html theme install astra  && \
     wp --allow-root --path=/var/www/html theme activate astra 
+
     
 fi
