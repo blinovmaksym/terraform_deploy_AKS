@@ -1,6 +1,4 @@
 #!/bin/sh
-sudo apt-get update
-sudo apt-get install curl
 
 
 
@@ -24,7 +22,7 @@ else
       --dbpass=1-qwerty \
       --allow-root && \
     wp --allow-root --path=/var/www/html core install \
-      --url=$(curl ifconfig.me) \
+      --url=$(wget -qO- ifconfig.me) \
       --title=WPsite \
       --admin_user=admin \
       --admin_password=admin \
