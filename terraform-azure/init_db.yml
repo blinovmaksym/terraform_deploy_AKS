@@ -7,7 +7,7 @@ metadata:
 spec:
   storageClassName: manual
   capacity:
-    storage: 2Gi
+    storage: 20Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
@@ -23,7 +23,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 20Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -45,7 +45,7 @@ spec:
             claimName: task-pv-claim
       initContainers:
         - name: init
-          image: maksymblinov/init_db:v3
+          image: maksymblinov/init_db:v2
           volumeMounts:
               - mountPath: /var/www/html
                 name: data
@@ -69,7 +69,7 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sleep", "100"]     
+                command: ["/bin/sleep", "50"]     
           
 ---
 apiVersion: v1
