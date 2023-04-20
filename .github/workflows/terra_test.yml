@@ -4,6 +4,8 @@ on:
     paths:
       - 'terraform-azure/**'
       - '.github/workflows/terra_test.yml'
+      - 'Dockerfile'
+      - 'setup-wp.sh'
     branches:
       - main  
   workflow_dispatch:
@@ -53,8 +55,32 @@ jobs:
       if: contains(github.event.head_commit.message, 'destroy')
       run: terraform destroy -auto-approve
 
-  terraform-CD:
+  Build-and-push-DockerImage:
     needs: terraform-CI
+    if: changed('Dockerfile', 'setup-wp.sh')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: maksymblinov/init_db:2
+
+
+  terraform-CD:
+    needs: 
+      - terraform-CI
+      - Build-and-push-DockerImage 
     if: "!contains(github.event.head_commit.message, 'destroy')"
     runs-on: ubuntu-latest
     defaults:
@@ -69,7 +95,6 @@ jobs:
       uses: azure/setup-kubectl@v3
 
     - name: Download kubeconfig
-      # if: "!contains(github.event.head_commit.message, 'destroy')"
       uses: actions/download-artifact@v3
       with:
         name: kubeconfig
