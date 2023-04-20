@@ -29,14 +29,14 @@ spec:
     spec:
       initContainers:
         - name: init
-          image: maksymblinov/init_db:v24
+          image: maksymblinov/init_db:v1
           volumeMounts:
             - name: wordpress-persistent-storage
               mountPath: /var/www/html
           
       containers:
         - name: wordpress
-          image: wordpress:latest
+          image: wordpress:5.6
           env:
             - name: WORDPRESS_DB_HOST
               value: "mysql-wpmax.mysql.database.azure.com"
