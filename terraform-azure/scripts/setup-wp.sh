@@ -1,8 +1,5 @@
 #!/bin/sh
 
-
-
-
 mysql -h $SERVER_NAME -u $USER_NAME -p$PASSWORD -P 3306 -e "\
    CREATE DATABASE IF NOT EXISTS test_manifest12; \
     USE test_manifest12; \
@@ -22,7 +19,7 @@ else
       --dbpass=1-qwerty \
       --allow-root && \
     wp --allow-root --path=/var/www/html core install \
-      --url=$(wget -qO- ifconfig.me) \
+      --url=http://localhost \
       --title=WPsite \
       --admin_user=admin \
       --admin_password=admin \
@@ -31,4 +28,3 @@ else
     wp --allow-root --path=/var/www/html theme install twentytwentytwo  && \
     wp --allow-root --path=/var/www/html theme activate twentytwentytwo     
 fi
-      # --url=http://localhost \

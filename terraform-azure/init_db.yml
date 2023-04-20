@@ -27,7 +27,7 @@ spec:
     spec:
       initContainers:
         - name: init
-          image: maksymblinov/init_db:v6
+          image: maksymblinov/init_db:v1
           volumeMounts:
             - name: wordpress-persistent-storage
               mountPath: /var/www/html
@@ -49,10 +49,7 @@ spec:
           volumeMounts:
             - name: wordpress-persistent-storage
               mountPath: /var/www/html
-          lifecycle:
-            postStart:
-              exec:
-                command: ["/bin/sleep", "15"]
+
       volumes:
       - name: wordpress-persistent-storage
         persistentVolumeClaim:
