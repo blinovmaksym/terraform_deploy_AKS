@@ -29,11 +29,11 @@ spec:
     spec:
       initContainers:
         - name: init
-          image: maksymblinov/init_db:v20
+          image: maksymblinov/init_db:v21
           volumeMounts:
             - name: wordpress-persistent-storage
               mountPath: /var/www/html
-          command: ["/bin/sh", "-c", "set -x; /usr/local/bin/setup-wp.sh"]    
+          # command: ["/bin/sh", "-c", "set -x; /usr/local/bin/setup-wp.sh"]    
       containers:
         - name: wordpress
           image: wordpress:latest
