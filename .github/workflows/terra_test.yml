@@ -80,7 +80,7 @@ jobs:
     needs: 
       - terraform-CI
       - Build-and-push-DockerImage 
-    if: "!contains(github.event.head_commit.message, 'destroy') || always() "
+    if: "!contains(github.event.head_commit.message, 'destroy')"
     
     runs-on: ubuntu-latest
     defaults:
