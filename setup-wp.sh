@@ -1,12 +1,12 @@
 #!/bin/sh
 
-if [ ! -f /var/www/html/wp-config.php ]; then
-    mysql -h $SERVER_NAME -u $USER_NAME -p$PASSWORD -P 3306 -e "\
-        CREATE DATABASE IF NOT EXISTS test_manifest12; \
-        USE test_manifest12; \
-        CREATE TABLE IF NOT EXISTS my_table (id INT PRIMARY KEY, name VARCHAR(50)); \
-        INSERT IGNORE INTO my_table (id, name) VALUES (1, 'John'), (2, 'Jane'), (3, 'Joe');" &&\
-    
+
+mysql -h $SERVER_NAME -u $USER_NAME -p$PASSWORD -P 3306 -e "\
+   CREATE DATABASE IF NOT EXISTS test_manifest12; \
+    USE test_manifest12; \
+    CREATE TABLE IF NOT EXISTS my_table (id INT PRIMARY KEY, name VARCHAR(50)); \
+    INSERT IGNORE INTO my_table (id, name) VALUES (1, 'John'), (2, 'Jane'), (3, 'Joe');" 
+if [ ! -f /var/www/html/wp-config.php ]; then    
     # Configure WP-CLI and install plugins and themes
     wp core download --path=/var/www/html --allow-root && \
     wp --allow-root --path=/var/www/html config create \
