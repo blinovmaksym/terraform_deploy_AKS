@@ -55,33 +55,10 @@ jobs:
       if: contains(github.event.head_commit.message, 'destroy')
       run: terraform destroy -auto-approve
 
-  Build-and-push-DockerImage:
-    needs: terraform-CI
-    if: contains(github.event.head_commit.message, 'build')
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      
-      - name: Build and Push Docker Image
-        uses: docker/build-push-action@v2
-        with:
-          context: terraform-azure/
-          push: true
-          tags: maksymblinov/init_db:v2
- 
   terraform-CD:
     needs: 
       - terraform-CI
-      - Build-and-push-DockerImage 
     if: "!contains(github.event.head_commit.message, 'destroy') "
-    # || always() 
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -90,6 +67,21 @@ jobs:
     steps:
     - name: Clon Rep
       uses: actions/checkout@v3
+
+    - name: Login to DockerHub
+      if: contains(github.event.head_commit.message, 'build')
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and Push Docker Image
+      if: contains(github.event.head_commit.message, 'build')
+      uses: docker/build-push-action@v2
+      with:
+        context: terraform-azure/
+        push: true
+        tags: maksymblinov/init_db:v2    
 
     - name: Setup kubectl
       uses: azure/setup-kubectl@v3
@@ -103,8 +95,8 @@ jobs:
     - name: Apply Kubernetes manifest
       run: kubectl apply -f init_db.yml
 
-    - name: Wait for 15 seconds()
-      run: sleep 20s
+    - name: Wait for 10 seconds()
+      run: sleep 10s
 
     - name: Check Service
       run: kubectl get service
