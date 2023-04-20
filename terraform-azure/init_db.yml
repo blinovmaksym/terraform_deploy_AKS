@@ -51,10 +51,10 @@ spec:
           volumeMounts:
             - name: wordpress-persistent-storage
               mountPath: /var/www/html
-          lifecycle:
-            postStart:
-              exec:
-                command: ["/bin/sleep", "30"]
+          # lifecycle:
+          #   postStart:
+          #     exec:
+          #       command: ["/bin/sleep", "30"]
       volumes:
       - name: wordpress-persistent-storage
         persistentVolumeClaim:
