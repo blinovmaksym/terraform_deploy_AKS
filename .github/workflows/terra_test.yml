@@ -76,8 +76,6 @@ jobs:
           push: true
           tags: maksymblinov/init_db:2
  
-
-
   terraform-CD:
     needs: 
       - terraform-CI
