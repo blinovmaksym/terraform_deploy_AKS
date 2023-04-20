@@ -41,6 +41,8 @@ resource "local_file" "kubeconfig" {
 
 
 
+
+
 # Create MySql Server 
 resource "azurerm_mysql_server" "aks-bd" {
   name                = "mysql-wpmax"
