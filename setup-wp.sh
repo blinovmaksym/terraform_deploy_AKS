@@ -6,7 +6,7 @@ mysql -h $SERVER_NAME -u $USER_NAME -p$PASSWORD -P 3306 -e "\
     USE test_manifest12; \
     CREATE TABLE IF NOT EXISTS my_table (id INT PRIMARY KEY, name VARCHAR(50)); \
     INSERT IGNORE INTO my_table (id, name) VALUES (1, 'John'), (2, 'Jane'), (3, 'Joe');" 
-if [ ! -f /var/www/html/wp-config.php ]; then  
+if [  -f /var/www/html/wp-config.php ]; then  
     wp --allow-root --path=/var/www/html plugin install contact-form-7 --activate && \
     wp --allow-root --path=/var/www/html theme install astra && \
     wp --allow-root --path=/var/www/html theme activate astra 
