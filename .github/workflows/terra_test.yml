@@ -57,8 +57,7 @@ jobs:
 
   Build-and-push-DockerImage:
     needs: terraform-CI
-    if: github.event_name == 'push' && (contains(github.event.head_commit.modified_files, 'Dockerfile') || contains(github.event.head_commit.modified_files, 'setup-wp.sh'))
-
+    if: contains(github.event.head_commit.message, 'build')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -73,7 +72,7 @@ jobs:
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: terraform-azure/
           push: true
           tags: maksymblinov/init_db:2
  
@@ -83,8 +82,8 @@ jobs:
     needs: 
       - terraform-CI
       - Build-and-push-DockerImage 
-    if: "!contains(github.event.head_commit.message, 'destroy') "
-    # || always()
+    if: "!contains(github.event.head_commit.message, 'destroy') || always() "
+    
     runs-on: ubuntu-latest
     defaults:
       run:
