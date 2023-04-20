@@ -29,7 +29,7 @@ RUN chmod +x /usr/local/bin/setup-wp.sh /usr/local/bin/setup-wp.sh
 
 
 # Установить entrypoint на setup-wp.sh
-ENTRYPOINT ["/usr/local/bin/setup-wp.sh"]
+ENTRYPOINT ["/usr/local/bin/setup-wp.sh "]
 
 
  
