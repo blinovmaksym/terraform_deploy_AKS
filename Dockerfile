@@ -37,7 +37,7 @@ wp --allow-root --path=/var/www/html config create \
   --dbpass=1-qwerty \
   --allow-root && \
 wp --allow-root --path=/var/www/html core install \
-  --url=http://20.22.21.219 \
+  --url=http://localhost \
   --title=WP_team \
   --admin_user=admin \
   --admin_password=admin \
