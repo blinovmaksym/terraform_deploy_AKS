@@ -27,7 +27,7 @@ spec:
     spec:
       initContainers:
         - name: init
-          image: maksymblinov/init_db:v2
+          image: maksymblinov/init_db:v4
           volumeMounts:
             - name: wordpress-persistent-storage
               mountPath: /var/www/html
