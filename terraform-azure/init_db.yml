@@ -20,8 +20,6 @@ spec:
   selector:
     matchLabels:
       app: wordpress
-  strategy:
-    type: Recreate    
   template:
     metadata:
       labels:
@@ -36,7 +34,7 @@ spec:
           
       containers:
         - name: wordpress
-          image: wordpress:5.6
+          image: wordpress:latest
           env:
             - name: WORDPRESS_DB_HOST
               value: "mysql-wpmax.mysql.database.azure.com"
@@ -51,10 +49,10 @@ spec:
           volumeMounts:
             - name: wordpress-persistent-storage
               mountPath: /var/www/html
-          # lifecycle:
-          #   postStart:
-          #     exec:
-          #       command: ["/bin/sleep", "30"]
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sleep", "15"]
       volumes:
       - name: wordpress-persistent-storage
         persistentVolumeClaim:
