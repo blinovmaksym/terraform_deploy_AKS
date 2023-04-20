@@ -11,11 +11,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
 
 
-
-
-
-
-
   default_node_pool {
     name                = "system"
     node_count          = var.system_node_count
