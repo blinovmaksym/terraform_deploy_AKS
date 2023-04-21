@@ -19,7 +19,7 @@ else
       --dbpass=1-qwerty \
       --allow-root && \
     wp --allow-root --path=/var/www/html core install \
-      --url=${terraform output wordpress_url}  \
+      --url=$(terraform output wordpress_url)  \
       --title=WPsite \
       --admin_user=admin \
       --admin_password=admin \
