@@ -78,6 +78,8 @@ resource "azurerm_mysql_firewall_rule" "aks-bd_sprout" {
 
 
 
+
+
 resource "azurerm_dns_cname_record" "aks-dns-zone" {
   name                = "wordpress"
   zone_name           = azurerm_dns_zone.aks-dns-zone.name
