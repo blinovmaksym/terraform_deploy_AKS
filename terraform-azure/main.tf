@@ -53,33 +53,39 @@ resource "azurerm_mysql_firewall_rule" "aks-bd_sprout" {
   end_ip_address      = "255.255.255.255"
 }
   # Create public ip
-  resource "azurerm_public_ip" "aks-pip" {
-    name                = "PublicIPForLB"
-    location            = azurerm_resource_group.aks-rg.location
-    resource_group_name = azurerm_resource_group.aks-rg.name
-    allocation_method   = "Static"
-  }
+resource "azurerm_public_ip" "aks-pip" {
+  name                = "PublicIPForLB"
+  location            = azurerm_resource_group.aks-rg.location
+  resource_group_name = azurerm_resource_group.aks-rg.name
+  allocation_method   = "Static"
+}
 
   # Create load balancer
-  resource "azurerm_lb" "aks-lb" {
-    name                = "LoadBalancer"
-    location            = azurerm_resource_group.aks-rg.location
-    resource_group_name = azurerm_resource_group.aks-rg.name
-    
-    frontend_ip_configuration {
-      name                 = "LoadBalancer_lb_public_ip"
-      public_ip_address_id = azurerm_public_ip.aks-pip.id
-  }
-  }
+resource "azurerm_lb" "aks-lb" {
+  name                = "LoadBalancer"
+  location            = azurerm_resource_group.aks-rg.location
+  resource_group_name = azurerm_resource_group.aks-rg.name
+
+  frontend_ip_configuration {
+    name                 = "LoadBalancer_lb_public_ip"
+    public_ip_address_id = azurerm_public_ip.aks-pip.id
+}
+}
+resource "azurerm_lb_rule" "lb_rule_TCP_80" {
+  resource_group_name            = azurerm_resource_group.aks-rg.name
+  loadbalancer_id                = azurerm_lb.aks-lb.id
+  name                           = "LB_TCP_80"
+  protocol                       = "Tcp"
+  frontend_port                  = 80
+  backend_port                   = 80
+  frontend_ip_configuration_name = "LoadBalancer_lb_public_ip"
+}
+
   # Create DNS record
   resource "azurerm_dns_zone" "aks-dns-zone" {
     name                = "wp-team.pp.ua"
     resource_group_name = azurerm_resource_group.aks-rg.name
   }
-
-
-
-
 
 resource "azurerm_dns_cname_record" "aks-dns-zone" {
   name                = "wordpress"
