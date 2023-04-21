@@ -19,7 +19,7 @@ else
       --dbpass=1-qwerty \
       --allow-root && \
     wp --allow-root --path=/var/www/html core install \
-      --url= http://wp-team.pp.ua \
+      --url=$(terraform output wordpress_url)  \
       --title=WPsite \
       --admin_user=admin \
       --admin_password=admin \
@@ -29,7 +29,7 @@ else
     wp --allow-root --path=/var/www/html theme activate twentytwentytwo     
 fi
 
-#  http://wp-team.pp.ua
 
 
-# #  --url=$(terraform output wordpress_url)  \
+
+
