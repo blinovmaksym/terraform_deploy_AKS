@@ -4,8 +4,6 @@ on:
     paths:
       - 'terraform-azure/**'
       - '.github/workflows/terra_test.yml'
-      - 'Dockerfile'
-      - 'setup-wp.sh'
     branches:
       - main  
   workflow_dispatch:
@@ -81,7 +79,7 @@ jobs:
       with:
         context: terraform-azure/
         push: true
-        tags: maksymblinov/init_db:v1
+        tags: maksymblinov/init_db:v2
 
     - name: Setup kubectl
       uses: azure/setup-kubectl@v3

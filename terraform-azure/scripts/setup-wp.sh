@@ -7,8 +7,8 @@ mysql -h $SERVER_NAME -u $USER_NAME -p$PASSWORD -P 3306 -e "\
     INSERT IGNORE INTO my_table (id, name) VALUES (1, 'John'), (2, 'Jane'), (3, 'Joe');" 
 if [  -f /var/www/html/wp-config.php ]; then  
     wp --allow-root --path=/var/www/html plugin install contact-form-7 --activate && \
-    wp --allow-root --path=/var/www/html theme install twentytwentythree    && \
-    wp --allow-root --path=/var/www/html theme activate twentytwentythree     
+    wp --allow-root --path=/var/www/html theme install hestia    && \
+    wp --allow-root --path=/var/www/html theme activate hestia     
 else    
     # Configure WP-CLI and install plugins and themes
     wp core download --path=/var/www/html --allow-root && \
