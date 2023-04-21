@@ -8,13 +8,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
   location            = var.location
   resource_group_name = azurerm_resource_group.aks-rg.name
   dns_prefix          = var.cluster_name
-
-
-
-
-
-
-
   default_node_pool {
     name                = "system"
     node_count          = var.system_node_count
@@ -22,13 +15,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
     type                = "VirtualMachineScaleSets"
     enable_auto_scaling = false
   }
-
-
-
-
-
-
-
 
   identity {
     type = "SystemAssigned"
@@ -38,11 +24,6 @@ resource "local_file" "kubeconfig" {
   filename = "${path.module}/kubeconfig"
   content  = azurerm_kubernetes_cluster.aks.kube_config_raw
 }
-
-
-
-
-
 # Create MySql Server 
 resource "azurerm_mysql_server" "aks-bd" {
   name                = "mysql-wpmax"
@@ -71,4 +52,32 @@ resource "azurerm_mysql_firewall_rule" "aks-bd_sprout" {
   start_ip_address    = "0.0.0.0"
   end_ip_address      = "255.255.255.255"
 }
+  # Create public ip
+  resource "azurerm_public_ip" "aks-pip" {
+    name                = "PublicIPForLB"
+    location            = azurerm_resource_group.aks-rg.location
+    resource_group_name = azurerm_resource_group.aks-rg.name
+    allocation_method   = "Static"
+  }
+
+  # Create load balancer
+  resource "azurerm_lb" "aks-lb" {
+    name                = "LoadBalancer"
+    location            = azurerm_resource_group.aks-rg.location
+    resource_group_name = azurerm_resource_group.aks-rg.name
+  
+  }
+  # Create DNS record
+  resource "azurerm_dns_zone" "aks-dns-zone" {
+    name                = "wp-team.pp.ua"
+    resource_group_name = azurerm_resource_group.aks-rg.name
+  }
+
+  resource "azurerm_dns_cname_record" "aks-dns-cname" {
+    name                = "wordpress"
+    zone_name           = azurerm_dns_zone.aks-dns-zone.name
+    resource_group_name = azurerm_resource_group.aks-rg.name
+    ttl                 = 300
+    record              = azurerm_public_ip.aks-pip.fqdn
+  }
 

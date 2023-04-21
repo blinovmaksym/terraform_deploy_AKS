@@ -19,7 +19,7 @@ else
       --dbpass=1-qwerty \
       --allow-root && \
     wp --allow-root --path=/var/www/html core install \
-      --url=http://localhost \
+      --url=http://wp-team.pp.ua \
       --title=WPsite \
       --admin_user=admin \
       --admin_password=admin \
