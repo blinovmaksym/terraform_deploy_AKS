@@ -78,7 +78,8 @@ resource "azurerm_dns_cname_record" "aks-dns-zone" {
   zone_name           = azurerm_dns_zone.aks-dns-zone.name
   resource_group_name = azurerm_resource_group.aks-rg.name
   ttl                 = 300
-  record              = azurerm_public_ip.aks-pip.fqdn
+  target_resource_id  = azurerm_public_ip.aks-pip.id
+  # record              = azurerm_public_ip.aks-pip.fqdn
 }
 
 
