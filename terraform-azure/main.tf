@@ -73,7 +73,7 @@ resource "azurerm_mysql_firewall_rule" "aks-bd_sprout" {
     resource_group_name = azurerm_resource_group.aks-rg.name
   }
 
-  resource "azurerm_dns_cname_record" "wp-team.pp.ua" {
+  resource "azurerm_dns_cname_record" "wpteamppua" {
     name                = "wordpress"
     zone_name           = azurerm_dns_zone.aks-dns-zone.name
     resource_group_name = azurerm_resource_group.aks-rg.name
