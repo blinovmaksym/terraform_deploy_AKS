@@ -94,3 +94,4 @@ resource "azurerm_dns_a_record" "a_record" {
   ttl                 = 300
   target_resource_id  = azurerm_public_ip.aks-pip.id
 }
+
