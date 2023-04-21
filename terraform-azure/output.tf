@@ -8,5 +8,5 @@ output "resource_group_name" {
   value = azurerm_resource_group.aks-rg.name
 }
 output "wordpress_url" {
-  value = "https://${azurerm_dns_cname_record.aks-dns-zone.name}"
+  value = "https://${azurerm_dns_cname_record.aks-dns-zone.record}"
 }
