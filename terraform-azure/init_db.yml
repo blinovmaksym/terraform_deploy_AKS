@@ -37,11 +37,11 @@ spec:
           image: wordpress:latest
           env:
             - name: WORDPRESS_DB_HOST
-              value: "mysql-wpmax.mysql.database.azure.com"
+              value: "mysql-wpmaximus.mysql.database.azure.com"
             - name: WORDPRESS_DB_NAME
               value: "test_manifest12"
             - name: WORDPRESS_DB_USER
-              value: "mysqladmin@mysql-wpmax"
+              value: "mysqladmin@mysql-wpmaximus"
             - name: WORDPRESS_DB_PASSWORD
               value: "1-qwerty"
           ports:

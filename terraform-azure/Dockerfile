@@ -19,8 +19,8 @@ RUN apk add --no-cache \
 RUN wget -O /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
     && chmod +x /usr/local/bin/wp
 # Set the server name and login credentials
-ENV SERVER_NAME mysql-wpmax.mysql.database.azure.com
-ENV USER_NAME mysqladmin@mysql-wpmax
+ENV SERVER_NAME mysql-wpmaximus.mysql.database.azure.com
+ENV USER_NAME mysqladmin@mysql-wpmaximus
 ENV PASSWORD 1-qwerty
 # Вынесенные скрипты
 COPY scripts/setup-wp.sh /usr/local/bin/setup-wp.sh

@@ -13,9 +13,9 @@ else
     # Configure WP-CLI and install plugins and themes
     wp core download --path=/var/www/html --allow-root && \
     wp --allow-root --path=/var/www/html config create \
-      --dbhost=mysql-wpmax.mysql.database.azure.com \
+      --dbhost=mysql-wpmaximus.mysql.database.azure.com \
       --dbname=test_manifest12 \
-      --dbuser=mysqladmin@mysql-wpmax \
+      --dbuser=mysqladmin@mysql-wpmaximus \
       --dbpass=1-qwerty \
       --allow-root && \
     wp --allow-root --path=/var/www/html core install \
