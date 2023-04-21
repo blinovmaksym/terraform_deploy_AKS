@@ -65,7 +65,10 @@ resource "azurerm_mysql_firewall_rule" "aks-bd_sprout" {
     name                = "LoadBalancer"
     location            = azurerm_resource_group.aks-rg.location
     resource_group_name = azurerm_resource_group.aks-rg.name
-  
+    frontend_ip_configuration {
+      name                 = "LoadBalancer_lb_public_ip"
+      public_ip_address_id = azurerm_public_ip.aks-pip.id
+  }
   }
   # Create DNS record
   resource "azurerm_dns_zone" "aks-dns-zone" {
@@ -78,8 +81,12 @@ resource "azurerm_dns_cname_record" "aks-dns-zone" {
   zone_name           = azurerm_dns_zone.aks-dns-zone.name
   resource_group_name = azurerm_resource_group.aks-rg.name
   ttl                 = 300
-  target_resource_id  = azurerm_public_ip.aks-pip.id
-  # record              = azurerm_public_ip.aks-pip.fqdn
+  record              = "wp-team.pp.ua"
 }
-
-
+resource "azurerm_dns_a_record" "a_record" {
+  name                = azurerm_dns_zone.aks-dns-zone.name
+  zone_name           = azurerm_dns_zone.aks-dns-zone.name
+  resource_group_name = azurerm_resource_group.aks-rg.name
+  ttl                 = 300
+  target_resource_id  = azurerm_public_ip.aks-pip.id
+}
