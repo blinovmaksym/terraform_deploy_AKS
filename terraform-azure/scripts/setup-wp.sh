@@ -29,7 +29,7 @@ else
     wp --allow-root --path=/var/www/html theme activate twentytwentytwo     
 fi
 
- http://wp-team.pp.ua
+#  http://wp-team.pp.ua
 
 
-#  --url=$(terraform output wordpress_url)  \
+# #  --url=$(terraform output wordpress_url)  \
