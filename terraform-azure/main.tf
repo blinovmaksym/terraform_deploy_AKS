@@ -2,6 +2,7 @@ resource "azurerm_resource_group" "aks-rg" {
   name     = var.resource_group_name
   location = var.location
 }
+
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = var.cluster_name
   kubernetes_version  = var.kubernetes_version
@@ -20,6 +21,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     type = "SystemAssigned"
   }
 }
+
 resource "local_file" "kubeconfig" {
   filename = "${path.module}/kubeconfig"
   content  = azurerm_kubernetes_cluster.aks.kube_config_raw
@@ -71,21 +73,24 @@ resource "azurerm_lb" "aks-lb" {
     public_ip_address_id = azurerm_public_ip.aks-pip.id
 }
 }
-resource "azurerm_lb_rule" "lb_rule_TCP_80" {
-  resource_group_name            = azurerm_resource_group.aks-rg.name
-  loadbalancer_id                = azurerm_lb.aks-lb.id
-  name                           = "LB_TCP_80"
-  protocol                       = "Tcp"
-  frontend_port                  = 80
-  backend_port                   = 80
-  frontend_ip_configuration_name = "LoadBalancer_lb_public_ip"
-}
+
+
+  resource "azurerm_lb_rule" "lb_rule_TCP_80" {
+    loadbalancer_id                = azurerm_lb.aks-lb.id
+    name                           = "LB_TCP_80"
+    protocol                       = "Tcp"
+    frontend_port                  = 80
+    backend_port                   = 80
+    frontend_ip_configuration_name = "LoadBalancer_lb_public_ip"
+    
+  }
 
   # Create DNS record
   resource "azurerm_dns_zone" "aks-dns-zone" {
     name                = "wp-team.pp.ua"
     resource_group_name = azurerm_resource_group.aks-rg.name
   }
+
 
 resource "azurerm_dns_cname_record" "aks-dns-zone" {
   name                = "wordpress"
@@ -101,4 +106,8 @@ resource "azurerm_dns_a_record" "a_record" {
   ttl                 = 300
   target_resource_id  = azurerm_public_ip.aks-pip.id
 }
+
+
+
+
 
