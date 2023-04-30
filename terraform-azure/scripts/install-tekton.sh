@@ -21,7 +21,7 @@ public_key=$(cat tekton_key.pub)
 curl -X POST -H "Authorization: token $TOKEN_TEKTON" -d '{"title":"Tekton SSH Key","key":"'"${public_key}"'"}' https://api.github.com/user/keys
 
 # # create secret YAML from contents
-cat tekton_key | base64 -w 0
+cat tekton_key | base64 -w 0 > tekton_key_base64.txt
 cat > tekton-git-ssh-secret.yaml << EOM
 apiVersion: v1
 kind: Secret
@@ -32,7 +32,7 @@ metadata:
     tekton.dev/git-0: github.com
 type: kubernetes.io/ssh-auth
 data:
-  ssh-privatekey: <base64 data>
+  ssh-privatekey: $(cat tekton_key_base64.txt)
 ---
 EOM
 
