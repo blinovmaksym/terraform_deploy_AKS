@@ -37,6 +37,7 @@ ssh-privatekey: $(cat tekton_key_base64.txt)
 EOM
 
 kubectl apply -f tekton-git-ssh-secret.yaml
+kubectl apply -f tekton/
 else    
     # Tekton SSH key exists on GitHub, skip generating and adding it
     echo "Tekton SSH key already exists on GitHub"
@@ -56,4 +57,3 @@ fi
 
 # kubectl apply -n tekton-pipelines -f regsecret.yaml
 
-kubectl apply -f tekton/
