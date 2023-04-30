@@ -14,45 +14,45 @@ env:
   ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   KUBECONFIG: ${{ github.workspace }}/terraform-azure/kubeconfig
 jobs:
-  terraform-CI:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: terraform-azure
+  # terraform-CI:
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: terraform-azure
       
-    steps:
-    - name: Clon Rep
-      uses: actions/checkout@v3  
+  #   steps:
+  #   - name: Clon Rep
+  #     uses: actions/checkout@v3  
 
-    - name: Create Storage
-      env:
-        SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
-      run: bash  $SCRIPT_DIR/create_storage.sh
+  #   - name: Create Storage
+  #     env:
+  #       SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
+  #     run: bash  $SCRIPT_DIR/create_storage.sh
 
-    - name: terraform init
-      run: terraform init
+  #   - name: terraform init
+  #     run: terraform init
 
-    - name: terraform plan
-      id: plan
-      run: terraform plan
+  #   - name: terraform plan
+  #     id: plan
+  #     run: terraform plan
       
-    - name: terraform apply
-      if: "!contains(github.event.head_commit.message, 'destroy')"
-      run: terraform apply -auto-approve
+  #   - name: terraform apply
+  #     if: "!contains(github.event.head_commit.message, 'destroy')"
+  #     run: terraform apply -auto-approve
 
-    - name: Upload kubeconfig artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: kubeconfig
-        path: terraform-azure/kubeconfig 
+  #   - name: Upload kubeconfig artifact
+  #     uses: actions/upload-artifact@v3
+  #     with:
+  #       name: kubeconfig
+  #       path: terraform-azure/kubeconfig 
       
-    - name: Terraform Destroy
-      if: contains(github.event.head_commit.message, 'destroy')
-      run: terraform destroy -auto-approve
+  #   - name: Terraform Destroy
+  #     if: contains(github.event.head_commit.message, 'destroy')
+  #     run: terraform destroy -auto-approve
 
   terraform-CD:
-    needs: 
-      - terraform-CI
+    # needs: 
+    #   - terraform-CI
     if: "!contains(github.event.head_commit.message, 'destroy') "
     runs-on: ubuntu-latest
     defaults:
@@ -93,14 +93,14 @@ jobs:
         SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
       run: bash  $SCRIPT_DIR/install-tekton.sh
       
-    - name: Apply Kubernetes manifest
-      run: kubectl apply -f init_db.yml
+    # - name: Apply Kubernetes manifest
+    #   run: kubectl apply -f init_db.yml
 
-    - name: Wait for 10 seconds()
-      run: sleep 10s
+    # - name: Wait for 10 seconds()
+    #   run: sleep 10s
 
-    - name: Check Service
-      run: kubectl get service
+    # - name: Check Service
+    #   run: kubectl get service
 
 
 
