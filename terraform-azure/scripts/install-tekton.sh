@@ -45,6 +45,7 @@ else
 fi   
 # create your Docker registry secret, for example:
 
+
 cat ~/.docker/config.json | base64 -w 0 > tekton_docker_key_base64.txt
 cat > regsecret.yaml << EOM
 kind: Secret
