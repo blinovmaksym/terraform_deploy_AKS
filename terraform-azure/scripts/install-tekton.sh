@@ -13,7 +13,7 @@ kubectl apply --filename https://storage.googleapis.com/tekton-releases/dashboar
 kubectl patch service tekton-dashboard -n tekton-pipelines --type='json' -p '[{"op":"replace","path":"/spec/type","value":"LoadBalancer"}]'
 
 
-ssh-keygen -t rsa -b 4096 -C "tekton@tekton.dev"
+ssh-keygen -t rsa -b 4096 -C "tekton@tekton.dev" -f tekton
 # save as tekton / tekton.pub
 # Get the public key contents
 public_key=$(cat tekton.pub)
