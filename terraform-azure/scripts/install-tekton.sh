@@ -22,7 +22,7 @@ public_key=$(cat tekton_key.pub)
 echo "${public_key}"
 
 # Create a new SSH key on GitHub
-curl -X POST -H "Authorization: token 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" -d '{"title":"Tekton SSH Key","key":"'"${public_key}"'"}' https://api.github.com/user/keys
+curl -X POST -H "Authorization: token $TOKEN_TEKTON" -d '{"title":"Tekton SSH Key","key":"'"${public_key}"'"}' https://api.github.com/user/keys
 
 # # curl -X POST -H "Authorization: token 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" -d '{"title":"Tekton SSH Key","key":"'${public_key}'"}' https://api.github.com/user/keys
 # # create secret YAML from contents
