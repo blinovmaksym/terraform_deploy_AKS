@@ -19,7 +19,8 @@ ls
 # Get the public key contents
 public_key=$(cat tekton_key.pub)
 # cat tekton_key
-cat  public_key
+echo "${public_key}"
+
 # Create a new SSH key on GitHub
 curl -X POST -H "Authorization: token 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" -d '{"title":"Tekton SSH Key","key":"'"${public_key}"'"}' https://api.github.com/user/keys
 
