@@ -44,15 +44,15 @@ else
 
 fi   
 # create your Docker registry secret, for example:
-ls ~/.docker/config.json
-cat ~/.docker/config.json | base64 -w 0
+
+cat ~/.docker/config.json | base64 -w 0 > tekton_docker_key_base64.txt
 cat > regsecret.yaml << EOM
 kind: Secret
 apiVersion: v1
 metadata:
   name: regsecret
 data:
-  .dockercfg: <base 64 data>
+  .dockercfg: $(cat tekton_docker_key_base64.txt)
 type: kubernetes.io/dockercfg
 EOM
 
