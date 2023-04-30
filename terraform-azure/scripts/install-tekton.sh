@@ -20,7 +20,7 @@ if ! curl -s -H "Authorization: token $TOKEN_TEKTON" https://api.github.com/user
     # Create a new SSH key on GitHub
     curl -X POST -H "Authorization: token $TOKEN_TEKTON" -d '{"title":"Tekton SSH Key","key":"'"${public_key}"'"}' https://api.github.com/user/keys
 
-    # # create secret YAML from contents
+# create secret YAML from contents
 cat tekton_key | base64 -w 0 > tekton_key_base64.txt
 cat > tekton-git-ssh-secret.yaml << EOM
 apiVersion: v1
@@ -29,7 +29,7 @@ metadata:
 name: git-ssh-key
 namespace: tekton-pipelines
 annotations:
-    tekton.dev/git-0: github.com
+tekton.dev/git-0: github.com
 type: kubernetes.io/ssh-auth
 data:
 ssh-privatekey: $(cat tekton_key_base64.txt)
