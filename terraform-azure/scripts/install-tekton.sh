@@ -19,11 +19,11 @@ ls
 # Get the public key contents
 public_key=$(cat tekton_key.pub)
 # Create a new SSH key on GitHub
-curl -X POST -H "Authorization: token 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" -d '{"title":"Tekton SSH Key","key":"'"${public_key}"'"}' https://api.github.com/user/keys
+curl -X POST -H "Authorization: token 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" -d '{"title":"Tekton SSH Key","key":"'"${public_key}"'"}' https://api.github.com/blinovmaksym/keys
 
 # curl -X POST -H "Authorization: token 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" -d '{"title":"Tekton SSH Key","key":"'${public_key}'"}' https://api.github.com/user/keys
 # create secret YAML from contents
-cat tekton | base64 -w 0
+cat tekton_key | base64 -w 0
 cat > tekton-git-ssh-secret.yaml << EOM
 apiVersion: v1
 kind: Secret
