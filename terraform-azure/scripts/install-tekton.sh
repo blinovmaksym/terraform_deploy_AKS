@@ -13,11 +13,11 @@ kubectl apply --filename https://storage.googleapis.com/tekton-releases/dashboar
 kubectl patch service tekton-dashboard -n tekton-pipelines --type='json' -p '[{"op":"replace","path":"/spec/type","value":"LoadBalancer"}]'
 
 
-ssh-keygen -t rsa -b 4096 -C "tekton@tekton.dev" -f tekton
-# save as tekton / tekton.pub
+ssh-keygen -t rsa -b 4096 -C "tekton@tekton.dev" -f tekton_key
+# save as tekton / tekton_key.pub
 ls
 # Get the public key contents
-public_key=$(cat tekton.pub)
+public_key=$(cat tekton_key.pub)
 # Create a new SSH key on GitHub
 curl -X POST -H "Authorization: token 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" -d '{"title":"Tekton SSH Key","key":"'${public_key}'"}' https://api.github.com/user/keys
 # create secret YAML from contents
