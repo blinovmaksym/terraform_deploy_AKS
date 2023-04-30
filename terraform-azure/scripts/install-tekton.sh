@@ -21,8 +21,8 @@ if ! curl -s -H "Authorization: token $TOKEN_TEKTON" https://api.github.com/user
     curl -X POST -H "Authorization: token $TOKEN_TEKTON" -d '{"title":"Tekton SSH Key","key":"'"${public_key}"'"}' https://api.github.com/user/keys
 
     # # create secret YAML from contents
-    cat tekton_key | base64 -w 0 > tekton_key_base64.txt
-    cat > tekton-git-ssh-secret.yaml << EOM
+cat tekton_key | base64 -w 0 > tekton_key_base64.txt
+cat > tekton-git-ssh-secret.yaml << EOM
 apiVersion: v1
 kind: Secret
 metadata:
