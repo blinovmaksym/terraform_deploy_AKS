@@ -32,7 +32,7 @@ metadata:
         tekton.dev/git-0: github.com
 type: kubernetes.io/ssh-auth
 data:
-ssh-privatekey: $(cat tekton_key_base64.txt)
+    ssh-privatekey: $(cat tekton_key_base64.txt)
 ---
 EOM
 
