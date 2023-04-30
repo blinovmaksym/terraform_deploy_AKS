@@ -1,0 +1,11 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  generateName: git-clone-taskrun-
+spec:
+  serviceAccountName: pipeline
+  taskRef:
+    name: git-clone
+  params:
+  - name: url
+    value: https://github.com/blinovmaksym/terraform_deploy_kuber.git

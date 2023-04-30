@@ -1,0 +1,28 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: build-and-push-pipeline
+spec:
+  resources:
+    - name: git-source
+      type: git
+  tasks:
+  - name: build-and-push
+    taskRef:
+      name: build-and-push
+    params:
+      - name: url
+        value: https://github.com/blinovmaksym/terraform_deploy_kuber
+      - name: dockerfile-path
+        value: terraform-azure/Dockerfile
+      - name: image
+        value: maksymblinov/init_db:latest
+    resources:
+      inputs:
+        - name: source
+          resource: git-source
+      outputs:
+        - name: built-image
+          resource:
+            name: $(params.image)
+            type: image
