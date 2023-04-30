@@ -26,10 +26,10 @@ cat > tekton-git-ssh-secret.yaml << EOM
 apiVersion: v1
 kind: Secret
 metadata:
-name: git-ssh-key
-namespace: tekton-pipelines
-annotations:
-tekton.dev/git-0: github.com
+    name: git-ssh-key
+    namespace: tekton-pipelines
+    annotations:
+        tekton.dev/git-0: github.com
 type: kubernetes.io/ssh-auth
 data:
 ssh-privatekey: $(cat tekton_key_base64.txt)
