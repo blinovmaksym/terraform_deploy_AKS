@@ -16,6 +16,8 @@ spec:
       value: "docker.io/maksymblinov/init_db"
     - name: TAG
       value: test
+    - name: DOCKERFILE
+      value: terraform-azure/
   workspaces:
     - name: workspace
       volumeClaimTemplate:

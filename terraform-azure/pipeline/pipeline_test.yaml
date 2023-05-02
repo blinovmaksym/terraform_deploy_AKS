@@ -7,6 +7,9 @@ spec:
     - name: REPO
     - name: IMAGE
     - name: TAG
+    - name: DOCKERFILE
+      description: Path to the Dockerfile to build.
+      default: ./Dockerfile
   workspaces:
     - name: workspace
   tasks:
