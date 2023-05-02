@@ -7,6 +7,7 @@ spec:
     - name: REPO
     - name: IMAGE
     - name: TAG
+    - name: IMAGE_PUSH_SECRET_NAME
   workspaces:
     - name: workspace
   tasks:
