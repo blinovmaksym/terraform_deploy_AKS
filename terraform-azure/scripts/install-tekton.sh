@@ -46,7 +46,6 @@ kubectl apply -f tekton/
 else    
     # Tekton SSH key exists on GitHub, skip generating and adding it
     echo "Tekton SSH key already exists on GitHub"
-
 fi   
 # create your Docker registry secret, for example:
 cat ~/.docker/config.json | base64 -w 0 > tekton_docker_key_base64.txt
