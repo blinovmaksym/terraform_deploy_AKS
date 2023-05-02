@@ -36,9 +36,9 @@ metadata:
     annotations:
         tekton.dev/git-0: github.com
 type: kubernetes.io/ssh-auth
-data:
+da:
     ssh-privatekey: $(cat tekton_key_base64.txt)
----
+---ta
 EOM
 
 kubectl apply -f tekton-git-ssh-secret.yaml
