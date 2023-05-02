@@ -10,11 +10,12 @@ spec:
     securityContext:
       fsGroup: 65532  
   params:
-
     - name: REPO
       value: "https://github.com/blinovmaksym/terraform_deploy_kuber"
-    - name: image-reference
-      value: maksymblinov/init_db:test
+    - name: IMAGE
+      value: "maksymblinov/init_db"
+    - name: TAG
+      value: test
   workspaces:
     - name: workspace
       volumeClaimTemplate:
