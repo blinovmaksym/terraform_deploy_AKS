@@ -1,7 +1,0 @@
-apiVersion: tekton.dev/v1beta1
-kind: TaskRun
-metadata:
-  generateName: run-git-clone-taskrun-
-spec:
-  taskRef:
-    name: git-clone
