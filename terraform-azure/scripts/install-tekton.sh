@@ -41,23 +41,24 @@ data:
 EOM
 
 kubectl apply -f tekton-git-ssh-secret.yaml
-kubectl apply -f tekton/
 else    
     # Tekton SSH key exists on GitHub, skip generating and adding it
     echo "Tekton SSH key already exists on GitHub"
 
 fi   
 # create your Docker registry secret, for example:
-cat ~/.docker/config.json | base64 -w 0 > tekton_docker_key_base64.txt
 cat > regsecret.yaml << EOM
 kind: Secret
 apiVersion: v1
 metadata:
   name: regsecret
-data:
-  .dockercfg: $(cat tekton_docker_key_base64.txt)
-type: kubernetes.io/dockercfg
+  annotations:
+    tekton.dev/docker-0: https://index.docker.io/
+type: kubernetes.io/basic-auth
+stringData:
+    username: $DOCKER_USERNAME
+    password: $DOCKER_PASSWORD
 EOM
 
 kubectl apply -f regsecret.yaml
-
+kubectl apply -f tekton/

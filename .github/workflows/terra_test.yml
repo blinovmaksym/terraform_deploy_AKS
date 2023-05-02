@@ -88,6 +88,8 @@ jobs:
     
     - name: Install Tekton
       env:
+        DOCKER_USERNAME : ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD : ${{ secrets.DOCKER_PASSWORD }}
         TOKEN_TEKTON : ${{ secrets.TOKEN_TEKTON }}
         SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
       run: bash  $SCRIPT_DIR/install-tekton.sh
