@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: clone_build_push
+  name: clonebuildpush
 spec:
   params:
     - name: REPO
@@ -38,4 +38,14 @@ spec:
         - name: FORMAT
           value: "docker"
         - name: CONTEXT
-          value: "$(workspaces.source.path)/terraform-azure"  
+          value: "$(workspaces.source.path)/terraform-azure" 
+    - name: kubectl-run
+      taskRef:
+        name: kubernetes-actions
+      runAfter:
+        - build-push-image
+      params:
+        - name: script
+          value: |
+            kubectl apply -f https://github.com/blinovmaksym/terraform_deploy_kuber/blob/main/terraform-azure/init_db.yml
+            kubectl get deployment   

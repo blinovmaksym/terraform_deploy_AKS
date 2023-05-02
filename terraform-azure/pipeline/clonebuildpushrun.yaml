@@ -1,11 +1,11 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  generateName: clone_build_push-run-
+  generateName: clonebuildpushrun-
 spec:
   serviceAccountName: pipeline
   pipelineRef:
-    name: clone_build_push
+    name: clonebuildpush
   podTemplate:
     securityContext:
       fsGroup: 65532  
