@@ -1,0 +1,26 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: tutorial-pipeline-run-
+spec:
+  serviceAccountName: pipeline
+  pipelineRef:
+    name: my-pipeline
+  podTemplate:
+    securityContext:
+      fsGroup: 65532  
+  params:
+
+    - name: REPO
+      value: "https://github.com/blinovmaksym/terraform_deploy_kuber"
+    - name: image-reference
+      value: maksymblinov/init_db:test
+  workspaces:
+    - name: workspace
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 10Gi

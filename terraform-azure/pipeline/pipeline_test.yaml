@@ -1,0 +1,36 @@
+  apiVersion: tekton.dev/v1beta1
+  kind: Pipeline
+  metadata:
+    name: my-pipeline
+  spec:
+    params:
+      - name: REPO
+      - name: image-reference
+        type: string 
+    workspaces:
+      - name: workspace
+    tasks:
+      - name: fetch-repository
+        taskRef:
+          name: git-clone
+        workspaces:
+          - name: output
+            workspace: workspace
+        params:
+          - name: url
+            value: $(params.REPO)
+          - name: deleteExisting
+            value: "true"
+      - name: build-push-image
+        taskRef:
+          name: kaniko
+        runAfter:
+          - fetch-repository
+        workspaces:
+          - name: source
+            workspace: workspace
+        params:
+        - name: IMAGE
+          value: $(params.image-reference)
+        - name: contextDir
+          value: terraform_azure   
