@@ -7,3 +7,11 @@ mysql -h mysql-wpmax.mysql.database.azure.com -u mysqladmin@mysql-wpmax -p1-qwer
 
 kubectl get secrets -n tekton-pipelines
 kubectl describe  secrets git-ssh-key -n tekton-pipelines
+kubectl delete secrets regsecret  -n tekton-pipelines
+kubectl get taskruns
+kubectl delete taskrun --all
+kubectl delete task --all
+kubectl create -f test_taskrun.yaml
+
+tkn tasks delete --all
+tkn hub install task git-clone && tkn hub install task buildah

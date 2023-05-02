@@ -1,96 +1,27 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: build-and-push
+  name: clone-repo
 spec:
-  params:
-    - name: git-source
-      type: string
-    - name: repo-revision
-      type: string
-      default: main
-    - name: dockerfile-path
-      type: string
-      default: Dockerfile
-    - name: image
-      type: string
-  workspaces:
-    - name: source
-      mountPath: /workspace/source
-    - name: dockerfile
-      mountPath: /workspace/dockerfile
+  description: "Клонирование репозитория из Git"
+  inputs:
+    params:
+    - name: repo-url
+      description: "URL вашего Git-репозитория"
+      default: ""
+  outputs:
+    resources:
+    - name: repo
+      type: git
+      description: "Клонированный репозиторий"
   steps:
-    - name: git-clone
-      image: alpine/git
-      args:
-        - clone
-        - $(params.repo-url)
-        - /workspace/source
-      env:
-        - name: GIT_TERMINAL_PROMPT
-          value: "0"
-        - name: GIT_SSL_NO_VERIFY
-          value: "true"
-        - name: GIT_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: git-ssh-key
-              key: username
-        - name: GIT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: git-ssh-key
-              key: password
-      volumeMounts:
-        - name: source
-          mountPath: /workspace/source
-    - name: docker-build
-      image: docker
-      args:
-        - build
-        - -t
-        - $(params.image)
-        - /workspace/dockerfile
-      volumeMounts:
-        - name: source
-          mountPath: /workspace/source
-        - name: dockerfile
-          mountPath: /workspace/dockerfile
-    - name: docker-push
-      image: docker
-      args:
-        - push
-        - $(params.image)
-      env:
-        - name: DOCKER_CONFIG
-          value: /workspace/docker
-        - name: DOCKER_REGISTRY
-          valueFrom:
-            secretKeyRef:
-              name: docker-registry-secret
-              key: registry
-        - name: DOCKER_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: dregsecret
-              key: username
-        - name: DOCKER_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: regsecret
-              key: password
-      volumeMounts:
-        - name: dockerfile
-          mountPath: /workspace/dockerfile
-        - name: docker
-          mountPath: /root/.docker
-          readOnly: true
+  - name: git-clone
+    image: alpine/git
+    command: ["git"]
+    args: ["clone", "{{inputs.params.repo-url}}", "/workspace/repo"]
+    volumeMounts:
+    - name: workspace
+      mountPath: /workspace
   volumes:
-    - name: source
-      emptyDir: {}
-    - name: dockerfile
-      configMap:
-        name: dockerfile-config
-  secrets:
-    - name: git-ssh-key
-    - name: regsecret
+  - name: workspace
+    emptyDir: {}
