@@ -16,6 +16,7 @@ kubectl get serviceaccounts
 kubectl delete  serviceaccounts pipeline
 kubectl apply -f pipelinerun_test.yaml
 kubectl create -f pipelinerun_test.yaml
+kubectl get secrets
 
 tkn tasks delete --all
 tkn hub install task git-clone && tkn hub install task buildah
