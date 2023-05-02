@@ -38,7 +38,7 @@ metadata:
 type: kubernetes.io/ssh-auth
 da:
     ssh-privatekey: $(cat tekton_key_base64.txt)
----ta
+---
 EOM
 
 kubectl apply -f tekton-git-ssh-secret.yaml
