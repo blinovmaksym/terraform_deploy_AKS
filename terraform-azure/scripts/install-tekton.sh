@@ -32,7 +32,6 @@ apiVersion: v1
 kind: Secret
 metadata:
     name: git-ssh-key
-    namespace: tekton-pipelines
     annotations:
         tekton.dev/git-0: github.com
 type: kubernetes.io/ssh-auth
@@ -60,5 +59,5 @@ data:
 type: kubernetes.io/dockercfg
 EOM
 
-kubectl apply -n tekton-pipelines -f regsecret.yaml
+kubectl apply -f regsecret.yaml
 

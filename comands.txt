@@ -12,6 +12,10 @@ kubectl get taskruns
 kubectl delete taskrun --all
 kubectl delete task --all
 kubectl create -f test_taskrun.yaml
+kubectl get serviceaccounts
+kubectl delete  serviceaccounts pipeline
+kubectl apply -f pipelinerun_test.yaml
+kubectl create -f pipelinerun_test.yaml
 
 tkn tasks delete --all
 tkn hub install task git-clone && tkn hub install task buildah
