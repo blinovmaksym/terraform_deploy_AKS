@@ -6,8 +6,11 @@ curl -LO https://github.com/tektoncd/cli/releases/download/v0.30.1/tkn_0.30.1_Da
 
 echo "Extract"
 sudo tar xvzf tkn_0.30.1_Darwin_all.tar.gz 
-# --strip-components 1
 
+
+echo "install"
+# Install tasks from Tekton Hub
+tkn hub install task git-clone && tkn hub install task buildah
 
 echo "Install Tekton Pipelines"
 # Install Tekton Pipelines
@@ -77,9 +80,3 @@ EOM
 kubectl apply -f regsecret.yaml
 kubectl apply -f tekton/
 
-echo "Test"
-# cd /usr/local/bin
-# ls
-tkn version
-#Install tasks  from Tekton Hub
-tkn hub install task git-clone && tkn hub install task buildah
