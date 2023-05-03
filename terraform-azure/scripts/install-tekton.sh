@@ -26,9 +26,7 @@ kubectl apply --filename https://storage.googleapis.com/tekton-releases/dashboar
 kubectl patch service tekton-dashboard -n tekton-pipelines --type='json' -p '[{"op":"replace","path":"/spec/type","value":"LoadBalancer"}]'
 
 
-tkn version
-#Install tasks  from Tekton Hub
-tkn hub install task git-clone && tkn hub install task buildah
+
 
 
 if ! curl -s -H "Authorization: token $TOKEN_TEKTON" https://api.github.com/user/keys | grep -q "Tekton SSH Key"; then
@@ -77,3 +75,9 @@ EOM
 
 kubectl apply -f regsecret.yaml
 kubectl apply -f tekton/
+
+echo "Test"
+cd /usr/local/bin
+tkn version
+#Install tasks  from Tekton Hub
+tkn hub install task git-clone && tkn hub install task buildah
