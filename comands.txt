@@ -2,7 +2,7 @@ docker build -t maksymblinov/init_db:v1 ./
 docker push maksymblinov/init_db:v1
 rm  ~/.docker/config.json
 az aks get-credentials --resource-group aks_tf_test  --name devops-test-aks
-mysql -h mysql-wpmax.mysql.database.azure.com -u mysqladmin@mysql-wpmax -p1-qwerty
+mysql -h mysql-wpmaximus.mysql.database.azure.com -u mysqladmin@mysql-wpmaximus -p1-qwerty
 
 
 kubectl get secrets -n tekton-pipelines
@@ -20,3 +20,5 @@ kubectl get secrets
 
 tkn tasks delete --all
 tkn hub install task git-clone && tkn hub install task buildah
+
+kubectl create clusterrolebinding pipeline-admin --clusterrole=cluster-admin --serviceaccount=default:pipeline

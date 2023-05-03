@@ -47,5 +47,5 @@ spec:
       params:
         - name: script  
           value: |
-            kubectl apply -f https://github.com/blinovmaksym/terraform_deploy_kuber/blob/main/terraform-azure/init_db.yml
-
+            kubectl apply -f https://raw.githubusercontent.com/blinovmaksym/terraform_deploy_kuber/main/terraform-azure/init_db.yml
+            
