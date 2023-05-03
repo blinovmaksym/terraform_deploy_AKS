@@ -72,3 +72,5 @@ EOM
 kubectl apply -f regsecret.yaml
 kubectl apply -f tekton/
 
+#Role
+kubectl create clusterrolebinding pipeline-admin --clusterrole=cluster-admin --serviceaccount=default:pipeline
