@@ -1,11 +1,14 @@
 #!/bin/bash
+echo "Tekton CLI"
 
-# Install Tekton CLI
-curl -LO https://github.com/tektoncd/cli/releases/download/v0.30.1/tkn_0.30.1_Darwin_all.tar.gz
-# Extract tkn to your PATH (e.g. /usr/local/bin)
+curl -LO https://github.com/tektoncd/cli/releases/download/v0.30.1/tektoncd-cli-0.30.1_Linux-64bit.deb
+sudo dpkg -i ./tektoncd-cli-0.30.1_Linux-64bit.deb
+# # Install Tekton CLI
+# curl -LO https://github.com/tektoncd/cli/releases/download/v0.30.1/tkn_0.30.1_Darwin_all.tar.gz
+# # Extract tkn to your PATH (e.g. /usr/local/bin)
 
-echo "Extract"
-sudo tar xvzf tkn_0.30.1_Darwin_all.tar.gz 
+# echo "Extract"
+# sudo tar xvzf tkn_0.30.1_Darwin_all.tar.gz 
 
 
 echo "install"
