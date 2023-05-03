@@ -5,7 +5,8 @@ curl -LO https://github.com/tektoncd/cli/releases/download/v0.30.1/tkn_0.30.1_Da
 # Extract tkn to your PATH (e.g. /usr/local/bin)
 
 echo "Extract"
-sudo tar xvzf tkn_0.30.1_Darwin_all.tar.gz --strip-components 1 -C /usr/local/bin
+sudo tar xvzf tkn_0.30.1_Darwin_all.tar.gz 
+# --strip-components 1
 
 
 echo "Install Tekton Pipelines"
