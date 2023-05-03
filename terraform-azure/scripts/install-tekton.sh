@@ -7,7 +7,7 @@ sudo dpkg -i ./tektoncd-cli-0.30.1_Linux-64bit.deb
 
 # Install tasks from Tekton Hub
 echo "install"
-tkn hub install task git-clone && tkn hub install task buildah
+tkn hub install task git-clone && tkn hub install task buildah && tkn hub install task kubernetes-actions
 
 echo "Install Tekton Pipelines"
 # Install Tekton Pipelines
