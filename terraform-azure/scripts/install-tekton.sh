@@ -1,18 +1,12 @@
 #!/bin/bash
-echo "Tekton CLI"
 
+# Install Tekton CLI
+echo "Tekton CLI"
 curl -LO https://github.com/tektoncd/cli/releases/download/v0.30.1/tektoncd-cli-0.30.1_Linux-64bit.deb
 sudo dpkg -i ./tektoncd-cli-0.30.1_Linux-64bit.deb
-# # Install Tekton CLI
-# curl -LO https://github.com/tektoncd/cli/releases/download/v0.30.1/tkn_0.30.1_Darwin_all.tar.gz
-# # Extract tkn to your PATH (e.g. /usr/local/bin)
 
-# echo "Extract"
-# sudo tar xvzf tkn_0.30.1_Darwin_all.tar.gz 
-
-
-echo "install"
 # Install tasks from Tekton Hub
+echo "install"
 tkn hub install task git-clone && tkn hub install task buildah
 
 echo "Install Tekton Pipelines"
@@ -32,10 +26,6 @@ kubectl apply --filename https://storage.googleapis.com/tekton-releases/dashboar
 # Update Tekton Dashboard service to use LoadBalancer
 kubectl patch service tekton-dashboard -n tekton-pipelines --type='json' -p '[{"op":"replace","path":"/spec/type","value":"LoadBalancer"}]'
 
-
-
-
-
 if ! curl -s -H "Authorization: token $TOKEN_TEKTON" https://api.github.com/user/keys | grep -q "Tekton SSH Key"; then
     ssh-keygen -t rsa -b 4096 -C "tekton@tekton.dev" -f tekton_key
     # save as tekton / tekton_key.pub
@@ -43,7 +33,6 @@ if ! curl -s -H "Authorization: token $TOKEN_TEKTON" https://api.github.com/user
     public_key=$(cat tekton_key.pub)
     # Create a new SSH key on GitHub
     curl -X POST -H "Authorization: token $TOKEN_TEKTON" -d '{"title":"Tekton SSH Key","key":"'"${public_key}"'"}' https://api.github.com/user/keys
-
 
 # create secret YAML from contents
 cat tekton_key | base64 -w 0 > tekton_key_base64.txt
