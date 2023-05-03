@@ -48,4 +48,4 @@ spec:
         - name: script  
           value: |
             kubectl apply -f https://github.com/blinovmaksym/terraform_deploy_kuber/blob/main/terraform-azure/init_db.yml
-            kubectl get deployment   
+
