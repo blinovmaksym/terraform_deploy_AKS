@@ -72,5 +72,20 @@ EOM
 kubectl apply -f regsecret.yaml
 kubectl apply -f tekton/
 
+# Create a triggers secret for GitHub:
+
+cat > github-trigger-secret.yaml << EOM
+apiVersion: v1
+kind: Secret
+metadata:
+  name: github-trigger-secret
+type: Opaque
+stringData:
+  secretToken: "123"
+---
+EOM
+
+kubectl apply -f github-trigger-secret.yaml
+
 #Role
-kubectl create clusterrolebinding pipeline-admin --clusterrole=cluster-admin --serviceaccount=default:pipeline
+# kubectl create clusterrolebinding pipeline-admin --clusterrole=cluster-admin --serviceaccount=default:pipeline
