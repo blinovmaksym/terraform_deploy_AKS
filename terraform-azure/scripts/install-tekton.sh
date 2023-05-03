@@ -78,6 +78,7 @@ kubectl apply -f tekton/
 
 echo "Test"
 cd /usr/local/bin
+ls
 tkn version
 #Install tasks  from Tekton Hub
 tkn hub install task git-clone && tkn hub install task buildah
