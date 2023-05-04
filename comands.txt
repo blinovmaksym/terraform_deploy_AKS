@@ -73,3 +73,14 @@ spec:
             value: $(body.repository.url)
         template:
           - name: git-push-template    
+
+
+                    # - name: "addChangedFiles"
+          #   value:
+          #     enabled: true
+        # - ref:
+        #     name: cel
+        #   # params:
+        #   # - name: filter
+        #   #   # execute only when a file within the controllers directory has changed
+        #   #   value: extensions.changed_files.matches('controllers/')

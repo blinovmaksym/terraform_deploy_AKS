@@ -4,7 +4,7 @@ metadata:
   name: clonebuildpush
 spec:
   params:
-    - name: REPO
+    - name: gitrepositoryurl
     - name: IMAGE
     - name: TAG
     - name: DOCKERFILE
@@ -21,7 +21,7 @@ spec:
           workspace: workspace
       params:
         - name: url
-          value: $(params.REPO)
+          value: $(params.gitrepositoryurl)
         - name: deleteExisting
           value: "true"
     - name: build-push-image

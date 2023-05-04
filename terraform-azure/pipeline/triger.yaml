@@ -31,7 +31,7 @@ spec:
           securityContext:
             fsGroup: 65532  
         params:
-          - name: REPO
+          - name: gitrepositoryurl
             value: "https://github.com/blinovmaksym/terraform_deploy_kuber"
           - name: IMAGE
             value: "docker.io/maksymblinov/init_db"
@@ -67,15 +67,6 @@ spec:
               secretKey: secretToken
           - name: "eventTypes"
             value: ["push"]
-          # - name: "addChangedFiles"
-          #   value:
-          #     enabled: true
-        # - ref:
-        #     name: cel
-        #   # params:
-        #   # - name: filter
-        #   #   # execute only when a file within the controllers directory has changed
-        #   #   value: extensions.changed_files.matches('controllers/')
       bindings:
         - ref: git-push-binding
       template:
