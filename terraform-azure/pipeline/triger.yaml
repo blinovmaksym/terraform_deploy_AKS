@@ -6,6 +6,10 @@ spec:
   params:
   - name: buildRevision
     value: $(body.head_commit.id)
+  - name: gitRepository
+    value: $(body.repository.html_url)
+  - name: commits
+    value: $(body.commits)
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerTemplate

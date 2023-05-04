@@ -3,8 +3,8 @@ kind: Pipeline
 metadata:
   name: clonebuildpush
 spec:
-  serviceAccountName: pipeline
   params:
+    - name: buildRevision
     - name: gitrepositoryurl
     - name: IMAGE
     - name: TAG
@@ -21,6 +21,8 @@ spec:
         - name: output
           workspace: workspace
       params:
+        - name: buildRevision
+          value: $(params.buildRevision)
         - name: url
           value: $(params.gitrepositoryurl)
         - name: deleteExisting
