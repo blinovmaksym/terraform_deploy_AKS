@@ -3,6 +3,7 @@ kind: Pipeline
 metadata:
   name: clonebuildpush
 spec:
+  serviceAccountName: pipeline
   params:
     - name: gitrepositoryurl
     - name: IMAGE
