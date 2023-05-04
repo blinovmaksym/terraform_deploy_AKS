@@ -29,7 +29,3 @@ else
     wp --allow-root --path=/var/www/html theme activate twentytwentytwo     
 fi
 
-
-
-
-
