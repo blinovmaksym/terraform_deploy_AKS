@@ -45,12 +45,7 @@ spec:
                   - ReadWriteOnce
                 resources:
                   requests:
-                    storage: 10Gi
-      params:
-      - name: repo-url
-        value: $(tt.params.gitrepositoryurl)
-      - name: revision
-        value: $(tt.params.gitrevision)              
+                    storage: 10Gi   
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: EventListener
