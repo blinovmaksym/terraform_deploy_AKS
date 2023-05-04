@@ -67,3 +67,4 @@ spec:
         - ref: git-push-binding
       template:
         ref : git-push-template
+
