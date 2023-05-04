@@ -7,13 +7,17 @@ spec:
   - name: gitrevision
     value: $(body.head_commit.id)
   - name: gitrepositoryurl
-    value: $(body.repository.url)
+    value: $(body.repository.clone_url)
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerTemplate
 metadata:
   name: git-push-template
 spec:
+  params:
+    - name: gitrevision
+      default: main
+    - name: gitrepositoryurl
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
@@ -42,6 +46,11 @@ spec:
                 resources:
                   requests:
                     storage: 10Gi
+      params:
+      - name: repo-url
+        value: $(tt.params.gitrepositoryurl)
+      - name: revision
+        value: $(tt.params.gitrevision)              
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: EventListener
@@ -52,15 +61,27 @@ spec:
   triggers:
     - name: git-push-trigger
       interceptors:
-      - github:
-          secretRef:
-            secretName: github-trigger-secret
-            secretKey: secretToken
-          eventTypes:
-          - push
-      - cel:
-          filter: "body.ref == 'refs/heads/main'"
+        - ref:
+            name: "github"
+            kind: ClusterInterceptor
+            apiVersion: triggers.tekton.dev
+          params:
+          - name: "pipeline"
+            value:
+              secretName: github-trigger-secret
+              secretKey: secretToken
+          - name: "eventTypes"
+            value: ["push"]
+          - name: "addChangedFiles"
+            value:
+              enabled: true
+        - ref:
+            name: cel
+          params:
+          - name: filter
+            # execute only when a file within the controllers directory has changed
+            value: extensions.changed_files.matches('controllers/')
       bindings:
-      - name: git-push-binding
+        - ref: git-push-binding
       template:
-      - name: git-push-template
+        ref : git-push-template
