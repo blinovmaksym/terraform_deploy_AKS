@@ -4,6 +4,7 @@ metadata:
   name: clonebuildpush
 spec:
   params:
+    - name: revision
     - name: gitrepositoryurl
     - name: IMAGE
     - name: TAG
@@ -20,6 +21,8 @@ spec:
         - name: output
           workspace: workspace
       params:
+        - name: revision
+          value: $(params.gitrepositoryurl)
         - name: url
           value: $(params.gitrepositoryurl)
         - name: deleteExisting

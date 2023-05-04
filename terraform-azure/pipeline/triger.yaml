@@ -27,6 +27,8 @@ spec:
           securityContext:
             fsGroup: 65532  
         params:
+          - name: revision
+            value: main
           - name: gitrepositoryurl
             value: "https://github.com/blinovmaksym/terraform_deploy_kuber"
           - name: IMAGE
