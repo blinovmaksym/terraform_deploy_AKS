@@ -86,6 +86,3 @@ stringData:
 EOM
 
 kubectl apply -f github-trigger-secret.yaml
-
-#Role
-# kubectl create clusterrolebinding pipeline-admin --clusterrole=cluster-admin --serviceaccount=default:pipeline

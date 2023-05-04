@@ -24,6 +24,10 @@ jobs:
     - name: Clon Rep
       uses: actions/checkout@v3  
 
+    - name: Create Branch Master
+      run: |
+        git branch  master
+
     - name: Create Storage
       env:
         SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
@@ -93,16 +97,6 @@ jobs:
         TOKEN_TEKTON : ${{ secrets.TOKEN_TEKTON }}
         SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
       run: bash  $SCRIPT_DIR/install-tekton.sh
-      
-    # - name: Apply Kubernetes manifest
-    #   run: kubectl apply -f init_db.yml
-
-    # - name: Wait for 10 seconds()
-    #   run: sleep 10s
-
-    # - name: Check Service
-    #   run: kubectl get service
-
 
 
 
