@@ -24,11 +24,6 @@ jobs:
     - name: Clon Rep
       uses: actions/checkout@v3  
 
-    - name: Create Branch Master
-      run: |
-        git branch  master
-        git push origin master
-
     - name: Create Storage
       env:
         SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
