@@ -7,7 +7,6 @@ spec:
   - name: gitrevision
     value: main
   - name: gitrepositoryurl
-    value: "https://github.com/blinovmaksym/terraform_deploy_kuber"
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerTemplate
@@ -67,3 +66,4 @@ spec:
         - ref: git-push-binding
       template:
         ref : git-push-template
+

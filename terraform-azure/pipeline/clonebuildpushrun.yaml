@@ -10,7 +10,7 @@ spec:
     securityContext:
       fsGroup: 65532  
   params:
-    - name: REPO
+    - name: gitrepositoryurl
       value: "https://github.com/blinovmaksym/terraform_deploy_kuber"
     - name: IMAGE
       value: "docker.io/maksymblinov/init_db"
