@@ -4,9 +4,8 @@ metadata:
   name: git-push-binding
 spec:
   params:
-  - name: gitrevision
-    value: main
-  - name: gitrepositoryurl
+  - name: buildRevision
+    value: $(body.head_commit.id)
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerTemplate
