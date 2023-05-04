@@ -22,7 +22,7 @@ spec:
           workspace: workspace
       params:
         - name: revision
-          value: $(params.gitrepositoryurl)
+          value: $(params.revision)
         - name: url
           value: $(params.gitrepositoryurl)
         - name: deleteExisting
