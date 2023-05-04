@@ -14,10 +14,10 @@ kind: TriggerTemplate
 metadata:
   name: git-push-template
 spec:
-  # params:
-  #   - name: gitrevision
-  #     default: main
-  #   - name: gitrepositoryurl
+  params:
+    - name: gitrevision
+      default: main
+    - name: gitrepositoryurl
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
