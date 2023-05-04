@@ -63,7 +63,8 @@ spec:
               secretKey: secretToken
           - name: "eventTypes"
             value: ["push"]
-
+          - name: "branches"
+            value: ["main"]
       bindings:
         - ref: git-push-binding
       template:
