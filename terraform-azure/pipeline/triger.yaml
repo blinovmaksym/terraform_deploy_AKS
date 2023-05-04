@@ -7,7 +7,6 @@ spec:
   - name: gitrevision
     value: main
   - name: gitrepositoryurl
-    value: $(body.repository.clone_url)
 ---
 apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerTemplate
