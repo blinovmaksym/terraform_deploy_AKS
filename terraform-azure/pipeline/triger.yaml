@@ -1,0 +1,66 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerBinding
+metadata:
+  name: git-push-binding
+spec:
+  params:
+  - name: gitrevision
+    value: $(body.head_commit.id)
+  - name: gitrepositoryurl
+    value: $(body.repository.url)
+---
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: git-push-template
+spec:
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: clonebuildpushrun-
+      spec:
+        serviceAccountName: pipeline
+        pipelineRef:
+          name: clonebuildpush
+        podTemplate:
+          securityContext:
+            fsGroup: 65532  
+        params:
+          - name: REPO
+            value: "https://github.com/blinovmaksym/terraform_deploy_kuber"
+          - name: IMAGE
+            value: "docker.io/maksymblinov/init_db"
+          - name: TAG
+            value: test1
+        workspaces:
+          - name: workspace
+            volumeClaimTemplate:
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 10Gi
+---
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  name: git-push-listener
+spec:
+  serviceAccountName: pipeline
+  triggers:
+    - name: git-push-trigger
+      interceptors:
+      - github:
+          secretRef:
+            secretName: github-trigger-secret
+            secretKey: secretToken
+          eventTypes:
+          - push
+      - cel:
+          filter: "body.ref == 'refs/heads/main'"
+      bindings:
+      - name: git-push-binding
+      template:
+      - name: git-push-template
