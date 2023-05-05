@@ -99,8 +99,8 @@ jobs:
     - name: Wait for 10 seconds()
       run: sleep 30s
 
-    - name: Check Service
-      run: kubectl exec -it service/mysql --/bin/bash
+    - name: Check Mysql
+      run: bash  $SCRIPT_DIR/mysql.sh
 
 
 
