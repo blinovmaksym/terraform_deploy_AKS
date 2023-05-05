@@ -96,13 +96,20 @@ jobs:
     - name: Apply Kubernetes manifest
       run: kubectl apply -f mysql.yml
 
-    - name: Wait for 10 seconds()
+    - name: Wait for 30 seconds()
       run: sleep 30s
 
     - name: Check Mysql
       env:
         SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
       run: bash  $SCRIPT_DIR/mysql.sh
+
+    - name: Wait for 30 seconds()
+      run: sleep 30s
+
+    - name: Delete Mysql
+      run: kubectl delete service mysql
+
 
 
 
