@@ -20,10 +20,6 @@ kubectl apply --filename https://storage.googleapis.com/tekton-releases/triggers
 # Install Tekton Operators
 kubectl apply -f https://storage.googleapis.com/tekton-releases/operator/latest/release.yaml
 
-
-# Update Tekton Dashboard service to use LoadBalancer
-kubectl patch service tekton-dashboard -n tekton-pipelines --type='json' -p '[{"op":"replace","path":"/spec/type","value":"LoadBalancer"}]'
-
 if ! curl -s -H "Authorization: token $TOKEN_TEKTON" https://api.github.com/user/keys | grep -q "Tekton SSH Key"; then
     ssh-keygen -t rsa -b 4096 -C "tekton@tekton.dev" -f tekton_key
     # save as tekton / tekton_key.pub
