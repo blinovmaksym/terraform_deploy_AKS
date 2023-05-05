@@ -88,6 +88,3 @@ jobs:
     - name: Delete Mysql
       run: kubectl delete service mysql
 
-
-
-
