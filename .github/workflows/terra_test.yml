@@ -69,13 +69,13 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build and Push Docker Image
-      if: contains(github.event.head_commit.message, 'build')
-      uses: docker/build-push-action@v4
-      with:
-        context: terraform-azure/
-        push: true
-        tags: maksymblinov/init_db:v3
+    # - name: Build and Push Docker Image
+    #   if: contains(github.event.head_commit.message, 'build')
+    #   uses: docker/build-push-action@v4
+    #   with:
+    #     context: terraform-azure/
+    #     push: true
+    #     tags: maksymblinov/init_db:v3
 
     - name: Setup kubectl
       uses: azure/setup-kubectl@v3
@@ -86,13 +86,23 @@ jobs:
         name: kubeconfig
         path: terraform-azure
     
-    - name: Install Tekton
-      env:
-        DOCKER_USERNAME : ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD : ${{ secrets.DOCKER_PASSWORD }}
-        TOKEN_TEKTON : ${{ secrets.TOKEN_TEKTON }}
-        SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
-      run: bash  $SCRIPT_DIR/install-tekton.sh
+    # - name: Install Tekton
+    #   env:
+    #     DOCKER_USERNAME : ${{ secrets.DOCKER_USERNAME }}
+    #     DOCKER_PASSWORD : ${{ secrets.DOCKER_PASSWORD }}
+    #     TOKEN_TEKTON : ${{ secrets.TOKEN_TEKTON }}
+    #     SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
+    #   run: bash  $SCRIPT_DIR/install-tekton.sh
+    - name: Apply Kubernetes manifest
+      run: kubectl apply -f mysql.yml
+
+    - name: Wait for 10 seconds()
+      run: sleep 30s
+
+    - name: Check Service
+      run: kubectl exec -it service/mysql -- mysql -u root -p1234 |
+          show databases;
+          
 
 
 
