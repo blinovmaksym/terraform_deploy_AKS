@@ -100,10 +100,7 @@ jobs:
       run: sleep 30s
 
     - name: Check Service
-      run: kubectl exec -it service/mysql -- mysql -u root -p1234 |
-          show databases;
-          
-
+      run: kubectl exec -it service/mysql -- mysql -u root -p1234
 
 
 
