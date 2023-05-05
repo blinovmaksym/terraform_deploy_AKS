@@ -1,4 +1,4 @@
 #!/bin/bash
 
 
-kubectl exec -it service/mysql -- mysql -u root -p1234
+kubectl exec -i service/mysql -- mysql -u root -p1234
