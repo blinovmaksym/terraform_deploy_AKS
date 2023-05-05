@@ -1,4 +1,4 @@
-name: test
+name: Mysql_Pipeline
 on:
   push:
     paths:
