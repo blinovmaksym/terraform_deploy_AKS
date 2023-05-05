@@ -27,60 +27,6 @@ kubectl create clusterrolebinding pipeline-admin --clusterrole=cluster-admin --s
 
 kubectl apply -f https://storage.googleapis.com/tekton-releases/interceptors/github/latest/release.yaml
 
-apiVersion: triggers.tekton.dev/v1beta1
-kind: EventListener
-metadata:
-  name: git-push-listener
-spec:
-  triggers:
-    - name: git-push-trigger
-      serviceAccountName: pipeline
-      interceptors:
-        - github:
-            eventTypes: ["push"]
-      bindings:
-        - ref: git-push-binding
-      template:
-        ref : git-push-template
 
-
-
-apiVersion: triggers.tekton.dev/v1beta1
-kind: EventListener
-metadata:
-  name: git-push-listener
-spec:
-  serviceAccountName: pipeline
-  triggers:
-      - name: github-push-trigger
-        interceptors:
-          - name: "verify-github-payload"
-            ref:
-              name: "github"
-              kind: ClusterInterceptor
-            params:
-              - name: secretRef
-                value:
-                  secretName: "github-trigger-secret"
-                  secretKey: "secretToken"
-              - name: eventTypes
-                value:
-                  - "Push Hook"
-        bindings:
-          - name: gitrevision
-            value: $(body.head_commit.id)
-          - name: gitrepositoryurl
-            value: $(body.repository.url)
-        template:
-          - name: git-push-template    
-
-
-                    # - name: "addChangedFiles"
-          #   value:
-          #     enabled: true
-        # - ref:
-        #     name: cel
-        #   # params:
-        #   # - name: filter
-        #   #   # execute only when a file within the controllers directory has changed
-        #   #   value: extensions.changed_files.matches('controllers/')
+#Forward dashboard to localhost:9097
+kubectl --namespace tekton-pipelines port-forward svc/tekton-dashboard 9097:9097

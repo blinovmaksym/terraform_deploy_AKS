@@ -34,7 +34,7 @@ spec:
           - name: IMAGE
             value: "docker.io/maksymblinov/init_db"
           - name: TAG
-            value: test1
+            value: latest
         workspaces:
           - name: workspace
             volumeClaimTemplate:
