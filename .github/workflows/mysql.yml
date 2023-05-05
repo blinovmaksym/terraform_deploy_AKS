@@ -1,8 +1,8 @@
 name: test
 on:
-  # push:
-  #   paths:
-  #     - '.github/workflows/mysql.yml'
+  push:
+    paths:
+      - '.github/workflows/mysql.yml'
     branches:
       - main  
   workflow_dispatch:
