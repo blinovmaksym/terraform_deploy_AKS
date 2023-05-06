@@ -71,7 +71,7 @@ jobs:
         name: kubeconfig
         path: terraform-azure
     
-    - name: Check Deploymeny/Service/Pods Before Deploy
+    - name: Check Services/Pods/Deployment Before Deploy
       run: kubectl get service && kubectl get pods && kubectl get  deployment
 
     - name: Apply Kubernetes manifest
@@ -81,7 +81,7 @@ jobs:
       run: sleep 10s
 
     - name: Check Mysql Pods
-      run: kubectl exec -it $(kubectl get pod -l "app=mysql" -o jsonpath='{.items[0].metadata.name}')-- mysql -u root -p1234  && show databases;
+      run: kubectl exec -it $(kubectl get pod -l "app=mysql" -o jsonpath='{.items[0].metadata.name}') -- mysql -u root -p1234  && show databases;
 
     - name: Create DB/Tables
       env:
@@ -89,7 +89,7 @@ jobs:
       run: bash  $SCRIPT_DIR/mysql.sh
 
     - name: Check Mysql Pods after Create DB
-      run: kubectl exec -it $(kubectl get pod -l "app=mysql" -o jsonpath='{.items[0].metadata.name}')-- mysql -u root -p1234  && show databases;
+      run: kubectl exec -it $(kubectl get pod -l "app=mysql" -o jsonpath='{.items[0].metadata.name}') -- mysql -u root -p1234  && show databases;
 
 
     - name: Wait for 10 seconds()
