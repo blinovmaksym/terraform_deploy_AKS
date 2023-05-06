@@ -100,6 +100,8 @@ jobs:
     - name: Check Services/Pods/Deployments after Delete
       run: kubectl get service && kubectl get pods && kubectl get  deployment
 
+      
+
     - name: Apply Kubernetes manifest after Delete
       run: kubectl apply -f mysql.yml
 
