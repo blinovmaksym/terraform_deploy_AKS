@@ -88,17 +88,13 @@ jobs:
         SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
       run: bash  $SCRIPT_DIR/mysql.sh
 
-    - name: Check Mysql Pods after Create DB
-      run: kubectl exec -it $(kubectl get pod -l "app=mysql" -o jsonpath='{.items[0].metadata.name}') -- mysql -u root -p1234  && show databases;
-
-
-    - name: Wait for 10 seconds()
-      run: sleep 10s
+    - name: Wait for 5 seconds()
+      run: sleep 5s
 
     - name: Delete Mysql
       run: kubectl delete service mysql && kubectl delete pods --selector app=mysql && kubectl delete deployment mysql
 
-    - name: Check Deploymeny/Service/Pods after Delete
+    - name: Check Services/Pods/Deployments after Delete
       run: kubectl get service && kubectl get pods && kubectl get  deployment
 
     - name: Apply Kubernetes manifest after Delete
@@ -111,7 +107,7 @@ jobs:
       run: kubectl get service && kubectl get pods && kubectl get  deployment
 
     - name: Check Mysql Pods
-      run: kubectl exec -it $(kubectl get pod -l "app=mysql" -o jsonpath='{.items[0].metadata.name}')-- mysql -u root -p1234  && show databases;
+      run: kubectl exec -i $(kubectl get pod -l "app=mysql" -o jsonpath='{.items[0].metadata.name}') -- mysql -u root -p1234 -e "SHOW DATABASES;"  && show databases;
 
 
 
