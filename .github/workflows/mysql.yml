@@ -88,8 +88,8 @@ jobs:
         SCRIPT_DIR: ${{ github.workspace }}/terraform-azure/scripts
       run: bash  $SCRIPT_DIR/mysql.sh
 
-    - name: Wait for 10 seconds()
-      run: sleep 10s
+    - name: Wait for 15 seconds()
+      run: sleep 15s
 
     - name: Delete Mysql
       run: kubectl delete service mysql && kubectl delete pods --selector app=mysql && kubectl delete deployment mysql
