@@ -77,8 +77,8 @@ jobs:
     - name: Apply Kubernetes manifest
       run: kubectl apply -f mysql.yml
 
-    - name: Wait for 10 seconds()
-      run: sleep 10s
+    - name: Wait for 15 seconds()
+      run: sleep 15s
 
     - name: Check Mysql Pods
       run: kubectl exec -i $(kubectl get pod -l "app=mysql" -o jsonpath='{.items[0].metadata.name}') -- mysql -u root -p1234 -e "SHOW DATABASES;"
@@ -100,8 +100,8 @@ jobs:
     - name: Apply Kubernetes manifest after Delete
       run: kubectl apply -f mysql.yml
 
-    - name: Wait for 10 seconds()
-      run: sleep 10s
+    - name: Wait for 15 seconds()
+      run: sleep 15s
 
     - name: Check Services/Pods/Deployments after repeated Deploy
       run: kubectl get service && kubectl get pods && kubectl get  deployment
