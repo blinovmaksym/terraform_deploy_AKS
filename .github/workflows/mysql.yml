@@ -105,8 +105,8 @@ jobs:
     - name: Apply Kubernetes manifest after Delete
       run: kubectl apply -f mysql.yml
 
-    - name: Wait for 40 seconds()
-      run: sleep 40s
+    - name: Wait for 50 seconds()
+      run: sleep 50s
 
     - name: Check Services/Pods/Deployments after repeated Deploy
       run: kubectl get service && kubectl get pods && kubectl get  deployment
