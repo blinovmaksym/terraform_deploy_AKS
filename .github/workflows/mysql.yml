@@ -81,7 +81,7 @@ jobs:
       run: sleep 10s
 
     - name: Check Mysql Pods
-      run: kubectl exec -it $(kubectl get pod -l "app=mysql" -o jsonpath='{.items[0].metadata.name}') -- mysql -u root -p1234  && show databases;
+      run: kubectl exec -it $(kubectl get pod -l "app=mysql" -o jsonpath='{.items[0].metadata.name}') -- mysql -u root -p1234
 
     - name: Create DB/Tables
       env:
