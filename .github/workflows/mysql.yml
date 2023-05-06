@@ -103,11 +103,11 @@ jobs:
     - name: Wait for 10 seconds()
       run: sleep 10s
 
-    - name: Check Deploymeny/Service/Pods after repeated Deploy
+    - name: Check Services/Pods/Deployments after repeated Deploy
       run: kubectl get service && kubectl get pods && kubectl get  deployment
 
-    - name: Check Mysql Pods
-      run: kubectl exec -i $(kubectl get pod -l "app=mysql" -o jsonpath='{.items[0].metadata.name}') -- mysql -u root -p1234 -e "SHOW DATABASES;"  && show databases;
+    - name: Check Mysql Pods after repeated Deploy
+      run: kubectl exec -i $(kubectl get pod -l "app=mysql" -o jsonpath='{.items[0].metadata.name}') -- mysql -u root -p1234 -e "SHOW DATABASES;"
 
 
 
