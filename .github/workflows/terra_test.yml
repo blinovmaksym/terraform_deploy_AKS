@@ -1,11 +1,11 @@
 name: test
 on:
-  push:
-    paths:
-      - 'terraform-azure/**'
-      - '.github/workflows/terra_test.yml'
-    branches:
-      - main  
+  # push:
+  #   paths:
+  #     - 'terraform-azure/**'
+  #     - '.github/workflows/terra_test.yml'
+  #   branches:
+  #     - main  
   workflow_dispatch:
 env:
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}

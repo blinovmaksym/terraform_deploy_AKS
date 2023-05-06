@@ -86,5 +86,26 @@ jobs:
       run: sleep 30s
 
     - name: Delete Mysql
-      run: kubectl delete service mysql
+      run: kubectl delete service mysql |
+           kubectl delete pods --selector app=mysql |
+           kubectl delete deployment mysql
+
+    - name: Check Deploymeny/Service/Pods after Delete
+      run: kubectl get service  |
+           kubectl get pods  |
+           kubectl get  deployment
+
+
+    - name: Apply Kubernetes manifest after Delete
+      run: kubectl apply -f mysql.yml
+
+    - name: Wait for 30 seconds()
+      run: sleep 30s
+
+    - name: Check Mysql
+      run: kubectl exec -it ppods --selector app=mysql -- mysql -u root -p1234
+
+
+
+
 
