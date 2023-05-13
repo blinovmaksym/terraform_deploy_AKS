@@ -92,6 +92,7 @@ jobs:
     - name: Wait for 20 seconds()
       run: sleep 20s
 
+
     - name: Delete Mysql
       run: kubectl delete service mysql && kubectl delete pods --selector app=mysql && kubectl delete deployment mysql
 
